@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="../../assets/js/tema.js"></script>
+    
+</head>
+<body>
+
+    <div class="contenido">
+        <nav class="navegacion">
+            <a href="../../index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Índice</a>
+            <a href="../../soluciones/03-Strings/index.html"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Ver soluciones</a>
+        </nav>
+        <h1>Strings o cadenas de texto</h1>
+        <p>Las cadenas de texto son un tipo de dato que se utiliza para representar texto en programación. En JavaScript, las cadenas de texto se pueden crear utilizando comillas simples (' '), comillas dobles (" ") o comillas invertidas (` `).</p>
+        <p>Las cadenas de texto son inmutables, lo que significa que no se pueden cambiar una vez que se han creado. Sin embargo, se pueden crear nuevas cadenas de texto a partir de cadenas existentes utilizando métodos y operadores.</p>
+        <p>Las cadenas de texto son un tipo de dato primitivo en JavaScript y se pueden utilizar para representar cualquier tipo de información textual, como nombres, direcciones, mensajes, etc.</p>
+        <p>En JavaScript, las cadenas de texto son objetos y tienen propiedades y métodos que se pueden utilizar para manipularlas. Algunos de los métodos más comunes son:</p>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i> 
+                <strong>length</strong>: Devuelve la longitud de la cadena de texto.
+                <div class="code-container"><pre><code>let texto = "Hola Mundo"; console.log(texto.length); // 10</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>toUpperCase()</strong>: Convierte la cadena de texto a mayúsculas.
+                <div class="code-container"><pre><code>let texto = "Hola Mundo"; console.log(texto.toUpperCase()); // "HOLA MUNDO"</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>toLowerCase()</strong>: Convierte la cadena de texto a minúsculas.
+                <div class="code-container"><pre><code>let texto = "Hola Mundo"; console.log(texto.toLowerCase()); // "hola mundo"</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>charAt()</strong>: Devuelve el carácter en una posición específica de la cadena de texto.
+                <div class="code-container"><pre><code>let texto = "Hola Mundo"; console.log(texto.charAt(4)); // " "</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>indexOf()</strong>: Devuelve la posición de la primera aparición de un carácter o una subcadena en la cadena de texto.
+                <div class="code-container"><pre><code>let texto = "Hola Mundo"; console.log(texto.indexOf("Mundo")); // 5</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>substring()</strong>: Devuelve una subcadena de la cadena de texto.
+                <div class="code-container"><pre><code>let texto = "Hola Mundo"; console.log(texto.substring(0, 4)); // "Hola"</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>split()</strong>: Divide la cadena de texto en un array de subcadenas.
+                <div class="code-container"><pre><code>let texto = "Hola Mundo"; console.log(texto.split(" ")); // ["Hola", "Mundo"]</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>replace()</strong>: Reemplaza una parte de la cadena de texto por otra.
+                <div class="code-container"><pre><code>let texto = "Hola Mundo"; console.log(texto.replace("Mundo", "JavaScript")); // "Hola JavaScript"</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>trim()</strong>: Elimina los espacios en blanco al principio y al final de la cadena de texto.
+                <div class="code-container"><pre><code>let texto = "   Hola Mundo   "; console.log(texto.trim()); // "Hola Mundo"</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>includes()</strong>: Comprueba si una cadena de texto contiene otra cadena de texto.
+                <div class="code-container"><pre><code>let texto = "Hola Mundo"; console.log(texto.includes("Mundo")); // true</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>startsWith()</strong>: Comprueba si una cadena de texto comienza con otra cadena de texto.
+                <div class="code-container"><pre><code>let texto = "Hola Mundo"; console.log(texto.startsWith("Hola")); // true</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>endsWith()</strong>: Comprueba si una cadena de texto termina con otra cadena de texto.
+                <div class="code-container"><pre><code>let texto = "Hola Mundo"; console.log(texto.endsWith("Mundo")); // true</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>repeat()</strong>: Repite la cadena de texto un número específico de veces.
+                <div class="code-container"><pre><code>let texto = "Hola "; console.log(texto.repeat(3)); // "Hola Hola Hola "</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>concat()</strong>: Concatena dos o más cadenas de texto.
+                <div class="code-container"><pre><code>let texto1 = "Hola"; let texto2 = "Mundo"; console.log(texto1.concat(" ", texto2)); // "Hola Mundo"</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>padStart()</strong>: Añade caracteres al principio de la cadena de texto hasta alcanzar una longitud específica.
+                <div class="code-container"><pre><code>let texto = "5"; console.log(texto.padStart(3, "0")); // "005"</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>padEnd()</strong>: Añade caracteres al final de la cadena de texto hasta alcanzar una longitud específica.
+                <div class="code-container"><pre><code>let texto = "5"; console.log(texto.padEnd(3, "0")); // "500"</code></pre></div>
+            </li>
+
+        </ul>
+    </div>
+
+    <script src="js/ejercicios.js"></script>
+</body>
+</html>

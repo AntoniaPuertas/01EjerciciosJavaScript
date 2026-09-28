@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="../../assets/js/tema.js"></script>
+</head>
+<body>
+
+    <div class="contenido">
+        <nav class="navegacion">
+            <a href="../../index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Índice</a>
+            <a href="../../soluciones/07-Objetos/index.html"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Ver soluciones</a>
+        </nav>
+        <h1>Objetos</h1>
+        <p>Los objetos son una colección de propiedades y métodos que representan un conjunto de datos relacionados. En JavaScript, los objetos son un tipo de dato complejo que se utiliza para almacenar información en forma de pares clave-valor.</p>
+        <p>Los objetos pueden contener diferentes tipos de datos, como números, cadenas de texto, booleanos, arreglos y otros objetos. Los objetos son una parte fundamental de la programación orientada a objetos y se utilizan para modelar entidades del mundo real.</p>
+        <p>En JavaScript, los objetos se pueden crear de varias maneras, como utilizando la sintaxis de objeto literal, la función constructora o la clase. Algunos de los métodos más comunes para trabajar con objetos son:</p>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i> 
+                <strong>Crear un objeto</strong>: Se puede crear un objeto utilizando la sintaxis de objeto literal.
+                <div class="code-container"><pre><code>let persona = { nombre: "Juan", edad: 30 };</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Acceder a propiedades</strong>: Se puede acceder a las propiedades de un objeto utilizando la notación de punto o la notación de corchetes.
+                <div class="code-container"><pre><code>console.log(persona.nombre); // Juan</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Modificar propiedades</strong>: Se pueden modificar las propiedades de un objeto asignando un nuevo valor.
+                <div class="code-container"><pre><code>persona.edad = 31;</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Añadir propiedades</strong>: Se pueden añadir nuevas propiedades a un objeto asignando un valor a una nueva clave.
+                <div class="code-container"><pre><code>persona.direccion = "Calle Falsa 123";</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Eliminar propiedades</strong>: Se pueden eliminar propiedades de un objeto utilizando el operador delete.
+                <div class="code-container"><pre><code>delete persona.edad;</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Recorrer un objeto</strong>: Se puede recorrer un objeto utilizando un bucle for...in.
+                <div class="code-container"><pre><code>for (let clave in persona) { console.log(clave + ": " + persona[clave]); }</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Convertir un objeto a JSON</strong>: Se puede convertir un objeto a una cadena JSON utilizando el método JSON.stringify().
+                <div class="code-container"><pre><code>let json = JSON.stringify(persona);</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Convertir JSON a un objeto</strong>: Se puede convertir una cadena JSON a un objeto utilizando el método JSON.parse().
+                <div class="code-container"><pre><code>let objeto = JSON.parse(json);</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Clonar un objeto</strong>: Se puede clonar un objeto utilizando el operador de propagación o el método Object.assign().
+                <div class="code-container"><pre><code>let clon = { ...persona };</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Unir dos objetos</strong>: Se pueden unir dos objetos utilizando el operador de propagación o el método Object.assign().
+                <div class="code-container"><pre><code>
+            // Usando el operador de propagación
+            let objeto1 = { a: 1, b: 2 };
+            let objeto2 = { c: 3, d: 4 };
+            let combinado = { ...objeto1, ...objeto2 };
+
+            // Usando Object.assign()
+            let combinado2 = Object.assign({}, objeto1, objeto2);
+            </code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Desestructuración de objetos</strong>: Se puede desestructurar un objeto para extraer propiedades en variables individuales.
+                <div class="code-container"><pre><code>let { nombre, edad } = persona;</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Uso de métodos</strong>: Se pueden definir métodos dentro de un objeto.
+                <div class="code-container"><pre><code>let persona = { nombre: "Juan", saludar: function() { console.log("Hola, " + this.nombre); } };</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Uso de this</strong>: Se puede utilizar la palabra clave this para referirse al objeto actual dentro de un método.
+                <div class="code-container"><pre><code>persona.saludar(); // Hola, Juan</code></pre></div>      
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Uso de Object.keys()</strong>: Se puede utilizar el método Object.keys() para obtener un array con las claves de un objeto.
+                <div class="code-container"><pre><code>let claves = Object.keys(persona);</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Uso de Object.values()</strong>: Se puede utilizar el método Object.values() para obtener un array con los valores de un objeto.
+                <div class="code-container"><pre><code>let valores = Object.values(persona);</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Uso de Object.entries()</strong>: Se puede utilizar el método Object.entries() para obtener un array con los pares clave-valor de un objeto.
+                <div class="code-container"><pre><code>let entradas = Object.entries(persona);</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Uso de Object.freeze()</strong>: Se puede utilizar el método Object.freeze() para evitar que un objeto sea modificado.
+                <div class="code-container"><pre><code>Object.freeze(persona);</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Uso de Object.seal()</strong>: Se puede utilizar el método Object.seal() para evitar que se añadan o eliminen propiedades de un objeto, pero se pueden modificar las propiedades existentes.
+                <div class="code-container"><pre><code>Object.seal(persona);</code></pre></div> 
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Uso de Object.assign()</strong>: Se puede utilizar el método Object.assign() para copiar propiedades de un objeto a otro.
+                <div class="code-container"><pre><code>let nuevoObjeto = Object.assign({}, persona);</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Uso de Object.create()</strong>: Se puede utilizar el método Object.create() para crear un nuevo objeto con un prototipo específico.
+                <div class="code-container"><pre><code>let nuevoObjeto = Object.create(persona);</code></pre></div>
+            </li>
+        </ul>
+            <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Objetos dentro de objetos</strong>: Un objeto puede contener otros objetos como propiedades.
+                <div class="code-container"><pre><code>let empresa = { 
+                nombre: "TechCorp", 
+                direccion: { 
+                    calle: "Avenida Principal", 
+                    numero: 123, 
+                    ciudad: "Ciudad Tech" 
+                } 
+            };</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Desestructuración de objetos anidados</strong>: Se puede desestructurar un objeto anidado para extraer propiedades específicas.
+                <div class="code-container"><pre><code>let { direccion: { calle, ciudad } } = empresa;
+            console.log(calle); // Avenida Principal
+            console.log(ciudad); // Ciudad Tech</code></pre></div>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Creación de objetos con Object Literal</strong>: Se puede crear un objeto utilizando la sintaxis de objeto literal.
+                <div class="code-container"><pre><code>let auto = { marca: "Toyota", modelo: "Corolla", año: 2022 };</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Creación de objetos con Object Constructor</strong>: Se puede crear un objeto utilizando un constructor.
+                <div class="code-container"><pre><code>function Auto(marca, modelo, año) {
+                this.marca = marca;
+                this.modelo = modelo;
+                this.año = año;
+            }
+            let miAuto = new Auto("Honda", "Civic", 2023);</code></pre></div>
+            </li>
+        </ul>
+    </div>
+
+    <script src="js/ejercicios.js"></script> 
+
+    
+</body>
+</html>

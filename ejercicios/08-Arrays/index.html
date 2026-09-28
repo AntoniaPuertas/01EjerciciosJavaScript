@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays</title>
+    <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="../../assets/js/tema.js"></script>
+</head>
+<body>
+
+    <div class="contenido">
+        <nav class="navegacion">
+            <a href="../../index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Índice</a>
+            <a href="../../soluciones/08-Arrays/index.html"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Ver soluciones</a>
+        </nav>
+        <h1>Arrays</h1>
+        <p>Un array es una estructura de datos que permite almacenar múltiples valores en una sola variable. En JavaScript, los arrays son objetos especiales que pueden contener cualquier tipo de dato, incluyendo otros arrays.</p>
+        <p>Los arrays son útiles para almacenar colecciones de datos y se pueden manipular fácilmente utilizando métodos integrados.</p>
+        <p>Ejemplo de un array:</p>
+        <div class="code-container"><pre><code>let frutas = ['manzana', 'banana', 'naranja'];
+console.log(frutas[0]); // salida: 'manzana'</code></pre></div>
+
+        <p>Los arrays en JavaScript son dinámicos, lo que significa que pueden crecer y decrecer según sea necesario. Puedes agregar o eliminar elementos de un array utilizando métodos como <code>push()</code>, <code>pop()</code>, <code>shift()</code>, y <code>unshift()</code>.</p>
+        <p>Ejemplo de agregar y eliminar elementos:</p>
+        <div class="code-container"><pre><code>let frutas = ['manzana', 'banana', 'naranja'];
+frutas.push('uva'); // agrega 'uva' al final del array
+console.log(frutas); // salida: ['manzana', 'banana', 'naranja', 'uva']
+
+frutas.pop(); // elimina el último elemento del array
+console.log(frutas); // salida: ['manzana', 'banana', 'naranja']</code></pre></div>
+
+        <p>También puedes recorrer un array utilizando un bucle <code>for</code> o el método <code>forEach()</code>.</p>
+        <p>Ejemplo de recorrer un array:</p>
+        <div class="code-container"><pre><code>let frutas = ['manzana', 'banana', 'naranja'];
+frutas.forEach(function(fruta) {
+    console.log(fruta);
+});</code></pre></div>
+        <p>En este ejemplo, el método <code>forEach()</code> recorre cada elemento del array y ejecuta la función proporcionada para cada uno de ellos.</p>
+        <p>Ejemplo de recorrer un array utilizando un bucle <code>for</code>:</p>
+        <div class="code-container"><pre><code>let frutas = ['manzana', 'banana', 'naranja'];
+for (let i = 0; i &lt; frutas.length; i++) {
+    console.log(frutas[i]);
+}</code></pre></div>
+
+        <p>Los arrays también tienen propiedades útiles, como <code>length</code>, que devuelve la cantidad de elementos en el array.</p>
+        <p>Ejemplo de usar la propiedad <code>length</code>:</p>
+        <div class="code-container"><pre><code>let frutas = ['manzana', 'banana', 'naranja'];
+console.log(frutas.length); // salida: 3</code></pre></div>
+
+        <h2>Índices y acceso a los elementos</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Índices</strong>: las posiciones empiezan en 0, así que el último elemento está en <code>length - 1</code>. Si accedes a una posición que no existe obtienes <code>undefined</code>.
+                <div class="code-container"><pre><code>let colores = ['rojo', 'verde', 'azul'];
+console.log(colores[colores.length - 1]); // 'azul'
+console.log(colores[5]); // undefined</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>at()</strong>: accede a una posición y admite índices negativos para contar desde el final.
+                <div class="code-container"><pre><code>console.log(colores.at(-1)); // 'azul'
+console.log(colores.at(-2)); // 'verde'</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Modificar un elemento</strong>: se asigna un nuevo valor a su posición. Funciona aunque el array se haya declarado con <code>const</code>, porque se cambia su contenido, no la variable.
+                <div class="code-container"><pre><code>const colores = ['rojo', 'verde', 'azul'];
+colores[1] = 'amarillo'; // ['rojo', 'amarillo', 'azul']
+// colores = []; // Error: no se puede reasignar una constante</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Arrays anidados</strong>: un array puede contener otros arrays (matrices). Se accede con dos índices.
+                <div class="code-container"><pre><code>let tablero = [
+    ['X', 'O', 'X'],
+    ['O', 'X', 'O'],
+];
+console.log(tablero[1][0]); // 'O' (fila 1, columna 0)</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Array.isArray()</strong>: comprueba si un valor es un array. <code>typeof</code> no sirve, porque devuelve <code>'object'</code>.
+                <div class="code-container"><pre><code>console.log(typeof [1, 2]);        // 'object'
+console.log(Array.isArray([1, 2])); // true</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Métodos que modifican el array original</h2>
+        <p>Estos métodos cambian el array sobre el que se llaman. Es la forma <strong>imperativa</strong> de trabajar que ves en la primera parte de <code>js/app.js</code>.</p>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>push() / unshift()</strong>: añaden elementos al final o al principio. Devuelven la nueva longitud.
+                <div class="code-container"><pre><code>let numeros = [2, 3];
+numeros.push(4);    // [2, 3, 4]
+numeros.unshift(1); // [1, 2, 3, 4]</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>pop() / shift()</strong>: eliminan el último o el primer elemento y lo devuelven.
+                <div class="code-container"><pre><code>let ultimo = numeros.pop();   // 4, numeros = [1, 2, 3]
+let primero = numeros.shift(); // 1, numeros = [2, 3]</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>splice(posición, cuántos, ...nuevos)</strong>: elimina, inserta o sustituye elementos en cualquier posición.
+                <div class="code-container"><pre><code>let letras = ['a', 'b', 'c', 'd'];
+letras.splice(1, 2);           // elimina 'b' y 'c' → ['a', 'd']
+letras.splice(1, 0, 'x', 'y'); // inserta en la posición 1 → ['a', 'x', 'y', 'd']</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>sort()</strong>: ordena el array. ¡Cuidado! Sin argumentos compara los elementos como texto, así que con números hay que pasar una función comparadora.
+                <div class="code-container"><pre><code>let nums = [10, 1, 25, 3];
+nums.sort();                // [1, 10, 25, 3]  (orden de texto)
+nums.sort((a, b) => a - b); // [1, 3, 10, 25]  (menor a mayor)
+nums.sort((a, b) => b - a); // [25, 10, 3, 1]  (mayor a menor)</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>reverse()</strong>: invierte el orden de los elementos.
+                <div class="code-container"><pre><code>[1, 2, 3].reverse(); // [3, 2, 1]</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Métodos que devuelven un array nuevo</h2>
+        <p>No tocan el original: crean y devuelven un array nuevo. Es la forma <strong>declarativa</strong>, la que se usa en la segunda parte de <code>js/app.js</code> y la que conviene preferir, porque evita cambios inesperados en datos que se usan en otras partes del código.</p>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>slice(inicio, fin)</strong>: copia una porción del array (el elemento de la posición <code>fin</code> no se incluye).
+                <div class="code-container"><pre><code>let letras = ['a', 'b', 'c', 'd'];
+letras.slice(1, 3); // ['b', 'c']
+letras.slice();     // copia completa</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Spread (...) y concat()</strong>: copian o unen arrays.
+                <div class="code-container"><pre><code>let a = [1, 2];
+let b = [3, 4];
+let unidos = [...a, ...b];   // [1, 2, 3, 4]
+let conExtra = [0, ...a, 5]; // [0, 1, 2, 5]
+let concatenados = a.concat(b); // [1, 2, 3, 4]</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>toSorted(), toReversed(), toSpliced() y with()</strong> (ES2023): versiones de <code>sort()</code>, <code>reverse()</code> y <code>splice()</code> que no modifican el original. <code>with()</code> devuelve una copia con un elemento cambiado.
+                <div class="code-container"><pre><code>let nums = [3, 1, 2];
+let ordenados = nums.toSorted((a, b) => a - b); // [1, 2, 3]
+let cambiado = nums.with(0, 99);               // [99, 1, 2]
+console.log(nums); // [3, 1, 2] → el original no cambia</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Buscar elementos</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>includes()</strong>: indica si el array contiene un valor.
+                <div class="code-container"><pre><code>['ana', 'luis'].includes('luis'); // true</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>indexOf()</strong>: devuelve la posición de un valor o <code>-1</code> si no está.
+                <div class="code-container"><pre><code>['ana', 'luis'].indexOf('luis'); // 1
+['ana', 'luis'].indexOf('eva');  // -1</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>find() / findIndex()</strong>: buscan el primer elemento que cumple una condición y devuelven el elemento (o <code>undefined</code>) o su posición (o <code>-1</code>). Son los que se usan con arrays de objetos.
+                <div class="code-container"><pre><code>let productos = [
+    { nombre: 'Tablet', precio: 300 },
+    { nombre: 'Monitor', precio: 500 },
+];
+productos.find(p => p.precio > 400);      // { nombre: 'Monitor', precio: 500 }
+productos.findIndex(p => p.precio > 400); // 1</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>findLast() / findLastIndex()</strong> (ES2023): igual que los anteriores, pero empiezan a buscar por el final.
+                <div class="code-container"><pre><code>[5, 12, 8, 20].findLast(n => n > 10); // 20</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>some() / every()</strong>: comprueban si al menos uno o todos los elementos cumplen una condición. Devuelven un booleano.
+                <div class="code-container"><pre><code>let notas = [7, 4, 9];
+notas.some(n => n &lt; 5);  // true  (hay algún suspenso)
+notas.every(n => n >= 5); // false (no han aprobado todos)</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Recorrer y transformar</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>for...of</strong>: recorre directamente los valores, sin necesidad de índice.
+                <div class="code-container"><pre><code>for (const fruta of ['manzana', 'pera']) {
+    console.log(fruta);
+}</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>map()</strong>: crea un array nuevo aplicando una función a cada elemento. El resultado tiene la misma longitud que el original.
+                <div class="code-container"><pre><code>let precios = [10, 20, 30];
+let conIva = precios.map(p => p * 1.21); // [12.1, 24.2, 36.3]</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>filter()</strong>: crea un array nuevo solo con los elementos que cumplen una condición.
+                <div class="code-container"><pre><code>let numeros = [1, 2, 3, 4, 5, 6];
+let pares = numeros.filter(n => n % 2 === 0); // [2, 4, 6]</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>reduce(función, valorInicial)</strong>: recorre el array acumulando un único resultado (una suma, un total, un objeto...).
+                <div class="code-container"><pre><code>let carrito = [
+    { nombre: 'Camiseta', precio: 15 },
+    { nombre: 'Pantalón', precio: 35 },
+];
+let total = carrito.reduce((acumulado, p) => acumulado + p.precio, 0); // 50</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Encadenar métodos</strong>: como <code>filter()</code> y <code>map()</code> devuelven arrays, se pueden encadenar.
+                <div class="code-container"><pre><code>let baratos = productos
+    .filter(p => p.precio &lt; 400)
+    .map(p => p.nombre); // ['Tablet']</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>join() y split()</strong>: convierten un array en texto y viceversa.
+                <div class="code-container"><pre><code>['a', 'b', 'c'].join('-'); // 'a-b-c'
+'a-b-c'.split('-');        // ['a', 'b', 'c']</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>flat()</strong>: aplana arrays anidados.
+                <div class="code-container"><pre><code>[1, [2, 3], [4]].flat(); // [1, 2, 3, 4]</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Desestructuración, Set y agrupación</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Desestructuración</strong>: extrae elementos en variables. Con <code>...</code> se recoge el resto.
+                <div class="code-container"><pre><code>let [primero, segundo, ...resto] = [10, 20, 30, 40];
+// primero = 10, segundo = 20, resto = [30, 40]</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Eliminar duplicados con Set</strong>: un <code>Set</code> no admite valores repetidos; con spread se vuelve a convertir en array.
+                <div class="code-container"><pre><code>let repetidos = [1, 2, 2, 3, 3, 3];
+let unicos = [...new Set(repetidos)]; // [1, 2, 3]</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Array.from()</strong>: crea un array a partir de cualquier cosa recorrible (un texto, un Set...) o de una longitud.
+                <div class="code-container"><pre><code>Array.from('hola');                  // ['h', 'o', 'l', 'a']
+Array.from({ length: 3 }, (_, i) => i); // [0, 1, 2]</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Object.groupBy()</strong> (ES2024): agrupa los elementos en un objeto según el valor que devuelva la función.
+                <div class="code-container"><pre><code>let productos = [
+    { nombre: 'Sartén', categoria: 'hogar' },
+    { nombre: 'Novela', categoria: 'libros' },
+    { nombre: 'Lámpara', categoria: 'hogar' },
+];
+let grupos = Object.groupBy(productos, p => p.categoria);
+// { hogar: [Sartén, Lámpara], libros: [Novela] }</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Novedades de ECMAScript 2026</h2>
+        <p>La última edición del estándar, aprobada en junio de 2026, incluye dos novedades relacionadas con arrays. Son muy recientes: antes de usarlas en un proyecto real, comprueba en MDN que los navegadores a los que te diriges las admiten.</p>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Math.sumPrecise()</strong>: suma todos los números de un array sin ir perdiendo precisión por el camino. Con <code>reduce()</code>, al sumar números de tamaños muy distintos, los pequeños pueden "desaparecer".
+                <div class="code-container"><pre><code>[1e20, 0.1, -1e20].reduce((a, b) => a + b, 0); // 0   (se ha perdido el 0.1)
+Math.sumPrecise([1e20, 0.1, -1e20]);           // 0.1
+
+// Ojo: no arregla la representación de los decimales
+Math.sumPrecise([0.1, 0.2]); // 0.30000000000000004</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Array.fromAsync()</strong>: como <code>Array.from()</code>, pero para datos que llegan de forma asíncrona. Lo usarás cuando veas promesas y <code>async/await</code>.
+            </li>
+        </ul>
+
+        <h2>Practica</h2>
+        <p>En <code>js/ejercicios.js</code> tienes 10 ejercicios sobre todo lo anterior para resolver dentro de cada función. Abre la consola (<code>F12</code>) para ver los resultados: aparecen después de los ejemplos de <code>js/app.js</code>, separados por encabezados <code>--- Ejercicio N ---</code>. Cuando termines, compáralos con las <a href="../../soluciones/08-Arrays/index.html">soluciones</a>.</p>
+
+    </div>
+
+    <script src="js/app.js"></script> 
+    <script src="js/ejercicios.js"></script>
+
+    
+</body>
+</html>

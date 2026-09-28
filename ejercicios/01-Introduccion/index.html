@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+    <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="../../assets/js/tema.js"></script>
+</head>
+<body>
+    <div class="contenido">
+        <nav class="navegacion">
+            <a href="../../index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Índice</a>
+        </nav>
+        <h1>JavaScript </h1>
+        <p id="saludo"></p>
+        <h2>Formas de añadir código de JavaScript en html</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                Entre las etiquetas head, dentro de las etiquetas &lt;script&gt;&lt;/script&gt;
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                Entre las etiquetas body, en cualquier lugar aunque se suele poner al final, antes de cerrar el body
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                En un archivo externo.
+            </li>
+        </ul>
+        <h2>¿Qué forma es la más recomendada?</h2>
+        <ul>
+            <li>
+                📌 Enlazar el código JavaScript desde un archivo externo es la opción más recomendada
+            </li>
+            <li>
+                📌 Esto nos permite utilizar el mismo código desde diferentes archivos html
+            </li>
+            <li>
+                📌 Para mantener nuestro proyecto organizado se recomienda crear un directorio para los archivos .js
+            </li>
+            <li>
+                📌 Para crear el enlace entre el archivo .js y nuestro .html la sintaxis es: &lt;script src="ruta relativa al archivo"&gt;&lt;/script&gt;
+            </li>
+            <li>
+                📌 Es importante poner la ruta relativa para que al subir el proyecto al servidor no hay que cambiar nada
+            </li>
+        </ul>
+        <h2>¿Quien se encarga de interpretar y ejecutar el código de JavaScript?</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                En la actualidad todos los navegadores son capaces de interpretar y ejecutar JavaScript
+            </li>
+        </ul>
+        <h2>¿Qué podemos hacer con JavaScript?</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                Validar formularios
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                Crear animaciones
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                Crear aplicaciones web
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                Crear juegos
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                Crear aplicaciones de escritorio
+            </li>
+        </ul>
+    </div>
+    <script src="js/01JavaScript.js"></script>
+</body>
+</html>

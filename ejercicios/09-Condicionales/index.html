@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condicionales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="../../assets/js/tema.js"></script>
+</head>
+<body>
+
+    <div class="contenido">
+        <nav class="navegacion">
+            <a href="../../index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Índice</a>
+            <a href="../../soluciones/09-Condicionales/index.html"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Ver soluciones</a>
+        </nav>
+        <h1>Condicionales</h1>
+        <p>Las estructuras condicionales permiten que un programa tome decisiones: ejecutar un bloque de código u otro según se cumpla o no una condición.</p>
+        <p>Una condición es cualquier expresión que JavaScript pueda evaluar como verdadera (<code>true</code>) o falsa (<code>false</code>), normalmente construida con operadores de comparación y operadores lógicos.</p>
+        <p>JavaScript ofrece varias formas de escribir condiciones: <code>if</code>, <code>else if</code> y <code>else</code>, el operador ternario, <code>switch</code> y los operadores lógicos para asignar valores por defecto.</p>
+
+        <h2>if, else if y else</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>if</strong>: ejecuta el bloque solo si la condición se cumple.
+                <div class="code-container"><pre><code>let edad = 20;
+if (edad >= 18) {
+    console.log('Eres mayor de edad');
+}</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>else</strong>: bloque alternativo que se ejecuta cuando la condición no se cumple.
+                <div class="code-container"><pre><code>if (edad >= 18) {
+    console.log('Puedes votar');
+} else {
+    console.log('Todavía no puedes votar');
+}</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>else if</strong>: encadena varias condiciones. Se evalúan en orden y solo se ejecuta la primera que se cumple, así que el orden importa.
+                <div class="code-container"><pre><code>let nota = 7.5;
+if (nota &lt; 5) {
+    console.log('Suspenso');
+} else if (nota &lt; 7) {
+    console.log('Aprobado');
+} else if (nota &lt; 9) {
+    console.log('Notable');
+} else {
+    console.log('Sobresaliente');
+}
+// Muestra 'Notable'</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Usa siempre llaves</strong>: sin ellas, el <code>if</code> solo afecta a la primera línea, lo que provoca errores difíciles de ver.
+                <div class="code-container"><pre><code>if (edad >= 18)
+    console.log('Mayor de edad');
+    console.log('Esta línea se ejecuta SIEMPRE');</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Construir condiciones</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Operadores de comparación</strong>: <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>===</code> (igual) y <code>!==</code> (distinto).
+                <div class="code-container"><pre><code>console.log(5 > 3);    // true
+console.log(5 !== 5);  // false</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>=== frente a ==</strong>: <code>===</code> compara valor y tipo; <code>==</code> convierte los tipos antes de comparar y da resultados inesperados. Usa siempre <code>===</code> y <code>!==</code>.
+                <div class="code-container"><pre><code>console.log(5 == '5');   // true  (convierte el string a número)
+console.log(5 === '5');  // false (número frente a string)
+console.log(0 == '');    // true  ¡sorpresa!</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Operadores lógicos</strong>: <code>&amp;&amp;</code> (y) exige que se cumplan todas las condiciones, <code>||</code> (o) que se cumpla al menos una, y <code>!</code> (no) invierte el resultado.
+                <div class="code-container"><pre><code>let tieneEntrada = true;
+if (edad >= 18 &amp;&amp; tieneEntrada) {
+    console.log('Puedes pasar al concierto');
+}
+if (!tieneEntrada) {
+    console.log('Compra una entrada');
+}</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Rangos</strong>: para comprobar si un valor está entre dos límites hay que escribir las dos comparaciones. La forma matemática <code>18 &lt;= edad &lt;= 65</code> no funciona en JavaScript.
+                <div class="code-container"><pre><code>if (edad >= 18 &amp;&amp; edad &lt;= 65) {
+    console.log('Edad laboral');
+}</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Truthy y falsy</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Conversión a booleano</strong>: en una condición, JavaScript convierte cualquier valor a <code>true</code> o <code>false</code>. Solo hay seis valores <strong>falsy</strong>: <code>false</code>, <code>0</code>, <code>''</code> (texto vacío), <code>null</code>, <code>undefined</code> y <code>NaN</code>. Todos los demás son <strong>truthy</strong>.
+                <div class="code-container"><pre><code>let nombre = '';
+if (nombre) {
+    console.log(`Hola, ${nombre}`);
+} else {
+    console.log('No has escrito tu nombre'); // se ejecuta este
+}</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Casos que confunden</strong>: el texto <code>'0'</code>, el texto <code>'false'</code>, un array vacío <code>[]</code> y un objeto vacío <code>{}</code> son truthy.
+                <div class="code-container"><pre><code>let carrito = [];
+if (carrito) { }            // se cumple: [] es truthy
+if (carrito.length > 0) { } // así se comprueba si tiene elementos</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Operador ternario</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>condición ? valorSiTrue : valorSiFalse</strong>: forma abreviada de un <code>if...else</code> que devuelve un valor. Es útil para asignaciones sencillas.
+                <div class="code-container"><pre><code>let edad = 15;
+let mensaje = edad >= 18 ? 'Mayor de edad' : 'Menor de edad';
+console.log(`Tienes ${edad} años: ${mensaje}`);</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Ternarios anidados</strong>: son posibles, pero con más de dos niveles se vuelven difíciles de leer. En ese caso es mejor un <code>if...else if</code>.
+                <div class="code-container"><pre><code>let signo = n > 0 ? 'Positivo' : n &lt; 0 ? 'Negativo' : 'Cero';</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>switch</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>switch</strong>: compara un valor con varios casos posibles. Es más claro que una cadena de <code>else if</code> cuando se compara la misma variable con valores concretos.
+                <div class="code-container"><pre><code>let semaforo = 'ámbar';
+switch (semaforo) {
+    case 'verde':
+        console.log('Adelante');
+        break;
+    case 'ámbar':
+        console.log('Precaución');
+        break;
+    case 'rojo':
+        console.log('Alto');
+        break;
+    default:
+        console.log('Color no válido');
+}</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>break</strong>: termina el <code>switch</code>. Si se olvida, la ejecución continúa en el siguiente <code>case</code> aunque no coincida.
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>default</strong>: se ejecuta cuando ningún <code>case</code> coincide. Es opcional, pero conviene incluirlo para controlar los valores no esperados.
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Agrupar casos</strong>: varios <code>case</code> seguidos sin código comparten el mismo bloque.
+                <div class="code-container"><pre><code>switch (dia) {
+    case 'sábado':
+    case 'domingo':
+        console.log('Fin de semana');
+        break;
+    default:
+        console.log('Laborable');
+}</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Comparación estricta</strong>: <code>switch</code> compara con <code>===</code>, así que <code>'1'</code> no coincide con <code>case 1</code>.
+            </li>
+        </ul>
+
+        <h2>Valores por defecto y propiedades opcionales</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>|| (OR)</strong>: devuelve el primer valor truthy. Sirve para dar un valor por defecto, pero también lo aplica cuando el valor es <code>0</code> o <code>''</code>.
+                <div class="code-container"><pre><code>let volumen = 0;
+let resultado = volumen || 50; // 50: se pierde el 0</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>?? (coalescencia nula)</strong>: solo usa el valor por defecto si el valor es <code>null</code> o <code>undefined</code>. Es la opción recomendada para valores por defecto.
+                <div class="code-container"><pre><code>let volumen = 0;
+let resultado = volumen ?? 50; // 0: se respeta el valor</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>?. (encadenamiento opcional)</strong>: accede a una propiedad solo si lo anterior existe; si no, devuelve <code>undefined</code> en lugar de lanzar un error. Combinado con <code>??</code> evita muchos <code>if</code>.
+                <div class="code-container"><pre><code>let usuario = { nombre: 'Ana' };
+console.log(usuario.direccion.ciudad);  // TypeError
+console.log(usuario.direccion?.ciudad); // undefined
+console.log(usuario.direccion?.ciudad ?? 'Desconocida'); // 'Desconocida'</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>&amp;&amp; para ejecutar si se cumple</strong>: la parte de la derecha solo se evalúa si la izquierda es truthy.
+                <div class="code-container"><pre><code>let esAdmin = true;
+esAdmin &amp;&amp; console.log('Mostrando panel de administración');</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Buenas prácticas</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Cláusulas de guarda</strong>: dentro de una función, comprueba primero los casos no válidos y sal con <code>return</code>. Así se evitan <code>if</code> anidados.
+                <div class="code-container"><pre><code>function precioEntrada(edad) {
+    if (edad &lt; 0) {
+        return 'Edad no válida';
+    }
+    return edad &lt; 12 ? 5 : 9;
+}</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Objetos como tabla de búsqueda</strong>: cuando cada caso solo devuelve un valor, un objeto es más corto que un <code>switch</code>.
+                <div class="code-container"><pre><code>const COLORES = { verde: 'Adelante', ámbar: 'Precaución', rojo: 'Alto' };
+console.log(COLORES[semaforo] ?? 'Color no válido');</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Condiciones legibles</strong>: si una condición es larga, guárdala en una variable con un nombre que explique qué comprueba.
+                <div class="code-container"><pre><code>const puedeConducir = edad >= 18 &amp;&amp; tieneCarnet &amp;&amp; !estaSancionado;
+if (puedeConducir) {
+    console.log('Buen viaje');
+}</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Practica</h2>
+        <p>En <code>js/ejercicios.js</code> tienes 10 ejercicios sobre todo lo anterior. Abre la consola (<code>F12</code>) para ver los resultados, separados por encabezados <code>--- Ejercicio N ---</code>. Cuando termines, compáralos con las <a href="../../soluciones/09-Condicionales/index.html">soluciones</a>.</p>
+
+    </div>
+
+    <script src="js/ejercicios.js"></script> 
+
+    
+</body>
+</html>

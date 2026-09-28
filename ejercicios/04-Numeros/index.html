@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Números</title>
+    <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="../../assets/js/tema.js"></script>
+</head>
+<body>
+
+    <div class="contenido">
+        <nav class="navegacion">
+            <a href="../../index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Índice</a>
+            <a href="../../soluciones/04-Numeros/index.html"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Ver soluciones</a>
+        </nav>
+        <h1>Números</h1>
+        <p>Los números son un tipo de dato que se utiliza para representar valores numéricos en programación. En JavaScript, los números pueden ser enteros o decimales y se pueden utilizar para realizar operaciones matemáticas.</p>
+        <p>Los números en JavaScript son de precisión doble, lo que significa que pueden representar números muy grandes o muy pequeños con una precisión de hasta 15 dígitos decimales.</p>
+        <p>Los números son un tipo de dato primitivo en JavaScript y se pueden utilizar para representar cualquier tipo de información numérica, como cantidades, precios, edades, etc.</p>
+        <p>En JavaScript, los números son objetos y tienen propiedades y métodos que se pueden utilizar para manipularlos. Algunos de los métodos más comunes son:</p>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i> 
+                <strong>parseInt()</strong>: Convierte una cadena de texto en un número entero.
+                <div class="code-container"><pre><code>let numero = "10"; console.log(parseInt(numero)); // 10</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>parseFloat()</strong>: Convierte una cadena de texto en un número decimal.
+                <div class="code-container"><pre><code>let numero = "10.5"; console.log(parseFloat(numero)); // 10.5</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>toFixed()</strong>: Formatea un número con un número específico de decimales.
+                <div class="code-container"><pre><code>let numero = 10.123456; console.log(numero.toFixed(2)); // 10.12</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Math.abs()</strong>: Devuelve el valor absoluto de un número.
+                <div class="code-container"><pre><code>let numero = -10; console.log(Math.abs(numero)); // 10</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Math.round()</strong>: Redondea un número al entero más cercano.
+                <div class="code-container"><pre><code>let numero = 10.5; console.log(Math.round(numero)); // 11</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Math.floor()</strong>: Redondea un número hacia abajo al entero más cercano.
+                <div class="code-container"><pre><code>let numero = 10.9; console.log(Math.floor(numero)); // 10</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Math.ceil()</strong>: Redondea un número hacia arriba al entero más cercano.
+                <div class="code-container"><pre><code>let numero = 10.1; console.log(Math.ceil(numero)); // 11</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Math.max()</strong>: Devuelve el número más grande de una lista de números.
+                <div class="code-container"><pre><code>let numeros = [1, 2, 3, 4, 5]; console.log(Math.max(...numeros)); // 5</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Math.min()</strong>: Devuelve el número más pequeño de una lista de números.
+                <div class="code-container"><pre><code>let numeros = [1, 2, 3, 4, 5]; console.log(Math.min(...numeros)); // 1</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Math.random()</strong>: Devuelve un número aleatorio entre 0 y 1.
+                <div class="code-container"><pre><code>console.log(Math.random()); // 0.123456789</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Math.sqrt()</strong>: Devuelve la raíz cuadrada de un número.
+                <div class="code-container"><pre><code>let numero = 16; console.log(Math.sqrt(numero)); // 4</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Math.pow()</strong>: Devuelve la potencia de un número.
+                <div class="code-container"><pre><code>let base = 2; let exponente = 3; console.log(Math.pow(base, exponente)); // 8</code></pre></div>
+            </li>
+        </ul>
+    </div>
+
+    <script src="js/ejercicios.js"></script> 
+
+    
+</body>
+</html>
