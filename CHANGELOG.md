@@ -13,9 +13,16 @@ El proyecto no usa números de versión: cada bloque de cambios se identifica po
 - **Índice general** (`index.html` en la raíz) con una tabla de todos los temas y enlaces a su teoría y a su solución.
 - **Tema 08 · Arrays**: teoría completa. Incluye índices y `at()`, métodos que modifican el array original frente a los que devuelven uno nuevo (`toSorted`, `toReversed`, `toSpliced` y `with`, de ES2023), búsqueda, `map`/`filter`/`reduce`, desestructuración, `Set`, `Object.groupBy` (ES2024) y las novedades de ECMAScript 2026 (`Math.sumPrecise` y `Array.fromAsync`). Añade 10 ejercicios propios.
 - **Tema 09 · Condicionales**: tema nuevo con teoría (`if`/`else`, `===` frente a `==`, truthy y falsy, ternario, `switch`, `??`, `?.` y buenas prácticas) y 10 ejercicios.
+- **Tema 10 · Bucles**: tema nuevo con teoría (`for`, `while`, `do...while`, `for...of`, `for...in`, `Object.entries()`, `break`, `continue`, bucles anidados, bucles infinitos y cuándo usar cada tipo) y 10 ejercicios. Las soluciones se han comprobado en Node.js en modo estricto.
+- **Tema 11 · Funciones**: tema nuevo con teoría (declaración, expresión y función flecha, `return`, hoisting, parámetros por defecto y rest, objetos como parámetro, ámbito, callbacks, closures, recursividad, funciones puras y JSDoc) y 10 ejercicios. Las soluciones y los ejemplos de la teoría se han comprobado en Node.js.
+- **Tema 12 · DOM**: tema nuevo con teoría (árbol del DOM, `querySelector`/`querySelectorAll`, `textContent` frente a `innerHTML` y el riesgo de XSS, `setHTML()` del Sanitizer API como novedad aún no disponible en Safari, atributos y `dataset`, `style` y `classList`, crear, insertar y eliminar elementos, navegación por el árbol, `closest()` y `defer`) y 10 ejercicios. Es el primer tema cuyos ejercicios modifican la página: la teoría y la solución incluyen la misma **zona de prácticas**. Las soluciones se han comprobado en jsdom.
+- **Estilos de la zona de prácticas** en `style.css` y dos variables de color nuevas para ambos temas (`--color-error` y `--color-texto-sobre-acento`), con contrastes comprobados. Las tarjetas agotadas no usan el texto atenuado, que en el tema oscuro solo alcanzaba 3,1:1 sobre el fondo.
+- **Tema 13 · Eventos**: tema nuevo con teoría (`addEventListener`, eventos de ratón, puntero, teclado, formulario y página, el objeto evento, `preventDefault()`, formularios con `FormData` y validación HTML, propagación y delegación, `removeEventListener`, `once`, `AbortController` y accesibilidad) y 10 ejercicios interactivos con su propia zona de prácticas: contador, panel desplegable, campos en directo, formulario validado, lista con delegación y pestañas accesibles. Las soluciones se han comprobado en jsdom simulando clics, escritura, teclas y envíos de formulario.
+- **Estilos de controles** (botones, campos, mensajes y pestañas) en `style.css` para ambos temas, con contorno visible al navegar con el teclado. Los bordes de los campos usan el color atenuado para cumplir el contraste mínimo de 3:1 que piden las pautas WCAG para los controles.
+- **Índice general**: el tema 14 aparece como "Próximamente", igual que en el README.
 - **Soluciones** de los ejercicios de los temas 06 · Booleanos (10) y 07 · Objetos (9).
-- **Archivos de enunciados** (`ejercicios/NN-Tema/js/ejercicios.js`) para los temas 03 a 09. Cada ejercicio tiene su enunciado, un encabezado en consola y un hueco para la solución, y los datos de partida ya están declarados.
-- **Páginas de soluciones** (`soluciones/NN-Tema/index.html`) para los temas 03 a 09.
+- **Archivos de enunciados** (`ejercicios/NN-Tema/js/ejercicios.js`) para los temas 03 a 13. Cada ejercicio tiene su enunciado, un encabezado en consola y un hueco para la solución, y los datos de partida ya están declarados.
+- **Páginas de soluciones** (`soluciones/NN-Tema/index.html`) para los temas 03 a 13.
 - **Barra de navegación** en todas las páginas, con enlaces al índice y entre la teoría y la solución de cada tema.
 - **Tema claro y oscuro**:
   - Hay un botón en la esquina superior derecha de todas las páginas.
@@ -57,8 +64,9 @@ El proyecto no usa números de versión: cada bloque de cambios se identifica po
 
 ## Notas para el profesorado
 
-- **Comprobación:** las soluciones de los temas 03 a 09 se han ejecutado en Node.js en modo estricto, simulando `prompt()`, y los resultados coinciden con los comentarios del código. El aspecto visual de las páginas debe revisarse en el navegador.
+- **Comprobación:** las soluciones de los temas 03 a 11 se han ejecutado en Node.js en modo estricto, simulando `prompt()`, y las de los temas 12 y 13 en jsdom (un navegador simulado) con su zona de prácticas, simulando en el 13 las interacciones del usuario. Los resultados coinciden con los comentarios del código. El aspecto visual de las páginas debe revisarse en el navegador.
+- **Zonas de prácticas de los temas 12 y 13:** su HTML está repetido en la página de teoría y en la de soluciones de cada tema. Si se cambia un ejercicio, hay que actualizar las dos copias.
 - **Carpetas antiguas:** tras la reorganización, en la raíz pueden quedar las carpetas `01-Introduccion` … `09-Condicionales` vacías; se pueden borrar.
 - **Licencia:** el proyecto no incluye archivo de licencia. Si se quiere permitir su reutilización, se puede añadir una (por ejemplo, MIT o, para material docente, Creative Commons BY-SA).
-- **Temas pendientes:** 10 · Bucles, 11 · Funciones, 12 · DOM, 13 · Eventos y 14 · Asincronía (anunciados en el README como "Próximamente").
+- **Temas pendientes:** 14 · Asincronía (anunciados en el README y en el índice como "Próximamente").
 - **Al publicar estos cambios:** sustituye `## [Sin publicar]` por la fecha de publicación, por ejemplo `## 2026-09-28`, y abre una nueva sección `## [Sin publicar]` encima para los cambios siguientes.

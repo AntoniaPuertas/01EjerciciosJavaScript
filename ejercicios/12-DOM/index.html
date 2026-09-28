@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="../../assets/js/tema.js"></script>
+</head>
+<body>
+
+    <div class="contenido">
+        <nav class="navegacion">
+            <a href="../../index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Índice</a>
+            <a href="../../soluciones/12-DOM/index.html"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Ver soluciones</a>
+        </nav>
+        <h1>DOM</h1>
+        <p>Cuando el navegador carga una página, convierte el HTML en un árbol de objetos llamado <strong>DOM</strong> (<em>Document Object Model</em>). Cada etiqueta es un nodo del árbol, y JavaScript puede leerlos y modificarlos.</p>
+        <p>Gracias al DOM, JavaScript puede cambiar textos, estilos y atributos, crear elementos nuevos o eliminarlos, y la página se actualiza al momento sin tener que recargarla.</p>
+
+        <h2>El árbol del DOM</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Nodos padre e hijos</strong>: cada elemento está dentro de otro (su <strong>padre</strong>) y puede contener otros (sus <strong>hijos</strong>). Los elementos que comparten padre son <strong>hermanos</strong>. En lo más alto está el objeto <code>document</code>, que representa toda la página.
+                <div class="code-container"><pre><code>&lt;body&gt;                      document
+  &lt;h1&gt;Tienda&lt;/h1&gt;             └── html
+  &lt;ul&gt;                            └── body
+    &lt;li&gt;Pan&lt;/li&gt;                     ├── h1  ("Tienda")
+    &lt;li&gt;Leche&lt;/li&gt;                   └── ul
+  &lt;/ul&gt;                                 ├── li  ("Pan")
+&lt;/body&gt;                                 └── li  ("Leche")</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Seleccionar elementos</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>querySelector()</strong>: devuelve el <strong>primer</strong> elemento que coincide con un selector CSS, o <code>null</code> si no encuentra ninguno. Admite cualquier selector de CSS.
+                <div class="code-container"><pre><code>const titulo = document.querySelector('h1');
+const menu = document.querySelector('#menu');           // por id
+const aviso = document.querySelector('.aviso');         // por clase
+const enlace = document.querySelector('nav a:first-child');</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>querySelectorAll()</strong>: devuelve <strong>todos</strong> los elementos que coinciden, en una <code>NodeList</code>. Se puede recorrer con <code>forEach</code> o <code>for...of</code> y tiene <code>length</code>. Si no hay ninguno, devuelve una lista vacía.
+                <div class="code-container"><pre><code>const productos = document.querySelectorAll('.producto');
+console.log(productos.length);
+productos.forEach(producto => console.log(producto.textContent));</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>getElementById()</strong>: busca por id, sin la <code>#</code>. Es más antiguo pero muy habitual.
+                <div class="code-container"><pre><code>const menu = document.getElementById('menu');</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Buscar dentro de un elemento</strong>: <code>querySelector</code> y <code>querySelectorAll</code> también funcionan sobre cualquier elemento, y entonces solo buscan dentro de él.
+                <div class="code-container"><pre><code>const lista = document.querySelector('#carrito');
+const articulos = lista.querySelectorAll('li');</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Si devuelve null</strong>: el selector no coincide con nada. Es la causa del error más habitual del DOM: <code>Cannot read properties of null</code>. Revisa el selector (<code>#</code> para id, <code>.</code> para clase) y que el elemento exista cuando se ejecuta el script.
+            </li>
+        </ul>
+
+        <h2>Leer y cambiar el contenido</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>textContent</strong>: lee o cambia el texto de un elemento. Si el texto contiene etiquetas, se muestran tal cual, sin interpretarlas. Es la opción recomendada para mostrar texto.
+                <div class="code-container"><pre><code>const saludo = document.querySelector('#saludo');
+saludo.textContent = 'Hola, Ana';
+saludo.textContent = '&lt;b&gt;Hola&lt;/b&gt;'; // se ve literalmente: &lt;b&gt;Hola&lt;/b&gt;</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>innerHTML</strong>: lee o cambia el contenido interpretándolo como HTML.
+                <div class="code-container"><pre><code>saludo.innerHTML = 'Hola, &lt;strong&gt;Ana&lt;/strong&gt;'; // "Ana" aparece en negrita</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Cuidado con innerHTML</strong>: nunca lo uses con datos escritos por un usuario (un formulario, un comentario...). Si el texto contiene código malicioso, el navegador lo ejecutaría. A este ataque se le llama <strong>XSS</strong>. Para mostrar datos de usuarios, usa <code>textContent</code> o crea los elementos con <code>createElement</code>.
+                <div class="code-container"><pre><code>const comentario = '&lt;img src="x" onerror="alert(\'¡Te he hackeado!\')"&gt;';
+caja.innerHTML = comentario;   // ¡peligroso: se ejecuta el código!
+caja.textContent = comentario; // seguro: se muestra como texto</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Novedad: setHTML()</strong>: los navegadores están incorporando <code>setHTML()</code>, que inserta HTML eliminando automáticamente las partes peligrosas. Firefox (desde la versión 148) y Chrome (desde la 146) ya la incluyen, pero Safari todavía no, así que aún no conviene usarla sin comprobar antes que existe.
+                <div class="code-container"><pre><code>if ('setHTML' in Element.prototype) {
+    caja.setHTML(comentario); // inserta la imagen sin el onerror
+}</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Atributos</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>getAttribute() y setAttribute()</strong>: leen y cambian cualquier atributo. <code>removeAttribute()</code> lo elimina.
+                <div class="code-container"><pre><code>const enlace = document.querySelector('a');
+console.log(enlace.getAttribute('href'));
+enlace.setAttribute('href', 'https://developer.mozilla.org/es/');
+enlace.removeAttribute('title');</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Propiedades directas</strong>: los atributos más comunes también se pueden usar como propiedades del elemento.
+                <div class="code-container"><pre><code>enlace.href = 'https://developer.mozilla.org/es/';
+enlace.target = '_blank';
+imagen.alt = 'Logotipo del curso';
+campo.value = 'Texto inicial'; // en inputs</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Atributos data-* y dataset</strong>: los atributos que empiezan por <code>data-</code> sirven para guardar datos propios en el HTML. Se leen y cambian con <code>dataset</code>, quitando el prefijo <code>data-</code> y escribiendo en camelCase. Su valor siempre es texto.
+                <div class="code-container"><pre><code>// &lt;li data-id="42" data-precio-oferta="9.99"&gt;Libro&lt;/li&gt;
+const libro = document.querySelector('li');
+console.log(libro.dataset.id);            // '42'
+console.log(libro.dataset.precioOferta);  // '9.99' (data-precio-oferta)
+libro.dataset.stock = '5';                // añade data-stock="5"</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Estilos y clases</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>style</strong>: cambia estilos en línea. Las propiedades con guion se escriben en camelCase: <code>background-color</code> pasa a ser <code>backgroundColor</code>.
+                <div class="code-container"><pre><code>const caja = document.querySelector('.caja');
+caja.style.backgroundColor = 'gold';
+caja.style.fontSize = '1.5rem';</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>classList</strong>: añade, quita o alterna clases. <code>toggle</code> pone la clase si no está y la quita si está; <code>contains</code> comprueba si la tiene.
+                <div class="code-container"><pre><code>caja.classList.add('activa');
+caja.classList.remove('oculta');
+caja.classList.toggle('seleccionada');
+console.log(caja.classList.contains('activa')); // true</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Mejor clases que style</strong>: define los estilos en el CSS y usa JavaScript solo para añadir o quitar clases. Así el diseño queda en un solo sitio, es más fácil de cambiar y se adapta a los temas claro y oscuro. Usa <code>style</code> para valores que se calculan en el momento, como una posición o un tamaño.
+            </li>
+        </ul>
+
+        <h2>Crear, insertar y eliminar elementos</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>createElement()</strong>: crea un elemento nuevo. Existe en memoria, pero no aparece en la página hasta que se inserta.
+                <div class="code-container"><pre><code>const nuevo = document.createElement('li');
+nuevo.textContent = 'Huevos';
+nuevo.classList.add('producto');</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Insertar</strong>: <code>append()</code> añade al final del elemento y <code>prepend()</code> al principio; <code>before()</code> y <code>after()</code> lo colocan fuera, delante o detrás. Todos admiten varios elementos o textos a la vez.
+                <div class="code-container"><pre><code>const lista = document.querySelector('#compra');
+lista.append(nuevo);                 // último de la lista
+lista.prepend(otro);                 // primero de la lista
+lista.before(titulo);                // justo antes de la lista, fuera de ella
+lista.append(elemento1, elemento2);  // varios a la vez</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Eliminar</strong>: <code>remove()</code> quita el elemento de la página. <code>replaceChildren()</code> sin argumentos vacía un elemento por completo.
+                <div class="code-container"><pre><code>document.querySelector('.aviso').remove();
+lista.replaceChildren(); // la lista se queda vacía</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Construir antes de insertar</strong>: cada vez que se inserta algo en la página, el navegador la redibuja. Si vas a crear muchos elementos, prepáralos primero y añádelos todos de una vez.
+                <div class="code-container"><pre><code>const frutas = ['Pera', 'Uva', 'Kiwi'];
+const elementos = frutas.map(fruta => {
+    const li = document.createElement('li');
+    li.textContent = fruta;
+    return li;
+});
+lista.append(...elementos); // una sola inserción</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Moverse por el árbol</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Desde un elemento se puede llegar a sus vecinos</strong> sin volver a buscar en todo el documento.
+                <div class="code-container"><pre><code>elemento.parentElement           // el padre
+elemento.children                // sus hijos (HTMLCollection)
+elemento.firstElementChild       // primer hijo
+elemento.lastElementChild        // último hijo
+elemento.previousElementSibling  // hermano anterior
+elemento.nextElementSibling      // hermano siguiente</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>closest()</strong>: sube por los antepasados del elemento y devuelve el primero que coincide con un selector. Será muy útil en el tema de Eventos.
+                <div class="code-container"><pre><code>const boton = document.querySelector('.tarjeta button');
+const tarjeta = boton.closest('.tarjeta'); // la tarjeta que contiene el botón</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Element frente a Node</strong>: propiedades como <code>childNodes</code>, <code>firstChild</code> o <code>nextSibling</code> también devuelven los nodos de texto, incluidos los saltos de línea del HTML. Usa las versiones con <code>Element</code> en el nombre para trabajar solo con etiquetas.
+            </li>
+        </ul>
+
+        <h2>Cuándo se ejecuta el script</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>El HTML se lee de arriba abajo</strong>: si un script se ejecuta antes de que exista un elemento, no lo encontrará. Hay dos soluciones habituales:
+                <div class="code-container"><pre><code>&lt;!-- 1. Al final del body, como en este curso --&gt;
+    &lt;script src="js/app.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;!-- 2. En el head con defer: se descarga a la vez pero espera a que el HTML esté listo --&gt;
+&lt;head&gt;
+    &lt;script src="js/app.js" defer&gt;&lt;/script&gt;
+&lt;/head&gt;</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Buenas prácticas</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Guarda en una variable</strong> los elementos que vayas a usar varias veces, en lugar de buscarlos cada vez.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Usa textContent</strong> para mostrar texto, y reserva <code>innerHTML</code> para HTML que hayas escrito tú.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Cambia clases</strong> en lugar de estilos sueltos.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Crea funciones</strong> que construyan los elementos repetidos (una tarjeta, una fila de tabla...) a partir de sus datos.
+            </li>
+        </ul>
+
+        <h2>Practica</h2>
+        <p>En <code>js/ejercicios.js</code> tienes 10 ejercicios que modifican la zona de prácticas de aquí abajo. Guarda el archivo y recarga la página para ver los cambios. Cuando termines, compáralos con las <a href="../../soluciones/12-DOM/index.html">soluciones</a>.</p>
+
+        <section class="zona-practica" aria-labelledby="titulo-zona-practica">
+            <h2 id="titulo-zona-practica">Zona de prácticas</h2>
+            <p>Los ejercicios modifican los elementos de esta zona. Mientras no los resuelvas, verás su contenido original.</p>
+
+            <div class="ejercicio" id="ej1">
+                <h3>Ejercicio 1</h3>
+                <p id="ej1-texto">Texto original</p>
+            </div>
+
+            <div class="ejercicio" id="ej2">
+                <h3>Ejercicio 2</h3>
+                <p class="ej2-parrafo">Primer párrafo.</p>
+                <p class="ej2-parrafo">Segundo párrafo.</p>
+                <p class="ej2-parrafo">Tercer párrafo.</p>
+                <p class="ej2-parrafo">Cuarto párrafo.</p>
+                <p>Hay <span id="ej2-total">?</span> párrafos de prueba.</p>
+            </div>
+
+            <div class="ejercicio" id="ej3">
+                <h3>Ejercicio 3</h3>
+                <div id="ej3-caja" class="caja">Soy una caja</div>
+            </div>
+
+            <div class="ejercicio" id="ej4">
+                <h3>Ejercicio 4</h3>
+                <ul id="ej4-tareas">
+                    <li data-completada="true">Leer la teoría del DOM</li>
+                    <li data-completada="false">Hacer los ejercicios</li>
+                    <li data-completada="true">Abrir la consola con F12</li>
+                    <li data-completada="false">Comparar con las soluciones</li>
+                </ul>
+                <p id="ej4-resumen"></p>
+            </div>
+
+            <div class="ejercicio" id="ej5">
+                <h3>Ejercicio 5</h3>
+                <p><a id="ej5-enlace" href="#">Enlace sin destino</a></p>
+            </div>
+
+            <div class="ejercicio" id="ej6">
+                <h3>Ejercicio 6</h3>
+            </div>
+
+            <div class="ejercicio" id="ej7">
+                <h3>Ejercicio 7</h3>
+                <div id="ej7-productos" class="tarjetas"></div>
+            </div>
+
+            <div class="ejercicio" id="ej8">
+                <h3>Ejercicio 8</h3>
+                <ul id="ej8-lista">
+                    <li>Camiseta</li>
+                    <li class="agotado">Sudadera</li>
+                    <li>Pantalón</li>
+                    <li class="agotado">Gorra</li>
+                    <li class="agotado">Bufanda</li>
+                </ul>
+                <p id="ej8-resultado"></p>
+            </div>
+
+            <div class="ejercicio" id="ej9">
+                <h3>Ejercicio 9</h3>
+                <div class="tabla-contenedor">
+                    <table class="tabla-practica" id="ej9-tabla">
+                        <thead>
+                            <tr>
+                                <th scope="col">Alumno</th>
+                                <th scope="col">Nota</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="ejercicio" id="ej10">
+                <h3>Ejercicio 10</h3>
+                <ul>
+                    <li>Lunes</li>
+                    <li id="ej10-actual">Martes</li>
+                    <li>Miércoles</li>
+                    <li>Jueves</li>
+                </ul>
+                <p id="ej10-resultado"></p>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="js/ejercicios.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soluciones · DOM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="../../assets/js/tema.js"></script>
+</head>
+<body>
+
+    <div class="contenido">
+        <nav class="navegacion">
+            <a href="../../index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Índice</a>
+            <a href="../../ejercicios/12-DOM/index.html"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Volver a la teoría</a>
+        </nav>
+        <h1>Soluciones: DOM</h1>
+        <p>Esta página ejecuta las soluciones de los 10 ejercicios del DOM.</p>
+        <ul>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                Los resultados se ven en la zona de prácticas de aquí abajo. Algunos ejercicios muestran también información en la consola (<code>F12</code>).
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                Compara esta zona con la de la página de teoría para ver qué ha cambiado cada ejercicio.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                El código está en <code>soluciones/12-DOM/js/soluciones.js</code>.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                Intenta resolver primero los ejercicios por tu cuenta: hay muchas soluciones correctas y la tuya no tiene por qué coincidir con esta.
+            </li>
+        </ul>
+
+        <section class="zona-practica" aria-labelledby="titulo-zona-practica">
+            <h2 id="titulo-zona-practica">Zona de prácticas</h2>
+            <p>Los ejercicios modifican los elementos de esta zona. Mientras no los resuelvas, verás su contenido original.</p>
+
+            <div class="ejercicio" id="ej1">
+                <h3>Ejercicio 1</h3>
+                <p id="ej1-texto">Texto original</p>
+            </div>
+
+            <div class="ejercicio" id="ej2">
+                <h3>Ejercicio 2</h3>
+                <p class="ej2-parrafo">Primer párrafo.</p>
+                <p class="ej2-parrafo">Segundo párrafo.</p>
+                <p class="ej2-parrafo">Tercer párrafo.</p>
+                <p class="ej2-parrafo">Cuarto párrafo.</p>
+                <p>Hay <span id="ej2-total">?</span> párrafos de prueba.</p>
+            </div>
+
+            <div class="ejercicio" id="ej3">
+                <h3>Ejercicio 3</h3>
+                <div id="ej3-caja" class="caja">Soy una caja</div>
+            </div>
+
+            <div class="ejercicio" id="ej4">
+                <h3>Ejercicio 4</h3>
+                <ul id="ej4-tareas">
+                    <li data-completada="true">Leer la teoría del DOM</li>
+                    <li data-completada="false">Hacer los ejercicios</li>
+                    <li data-completada="true">Abrir la consola con F12</li>
+                    <li data-completada="false">Comparar con las soluciones</li>
+                </ul>
+                <p id="ej4-resumen"></p>
+            </div>
+
+            <div class="ejercicio" id="ej5">
+                <h3>Ejercicio 5</h3>
+                <p><a id="ej5-enlace" href="#">Enlace sin destino</a></p>
+            </div>
+
+            <div class="ejercicio" id="ej6">
+                <h3>Ejercicio 6</h3>
+            </div>
+
+            <div class="ejercicio" id="ej7">
+                <h3>Ejercicio 7</h3>
+                <div id="ej7-productos" class="tarjetas"></div>
+            </div>
+
+            <div class="ejercicio" id="ej8">
+                <h3>Ejercicio 8</h3>
+                <ul id="ej8-lista">
+                    <li>Camiseta</li>
+                    <li class="agotado">Sudadera</li>
+                    <li>Pantalón</li>
+                    <li class="agotado">Gorra</li>
+                    <li class="agotado">Bufanda</li>
+                </ul>
+                <p id="ej8-resultado"></p>
+            </div>
+
+            <div class="ejercicio" id="ej9">
+                <h3>Ejercicio 9</h3>
+                <div class="tabla-contenedor">
+                    <table class="tabla-practica" id="ej9-tabla">
+                        <thead>
+                            <tr>
+                                <th scope="col">Alumno</th>
+                                <th scope="col">Nota</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="ejercicio" id="ej10">
+                <h3>Ejercicio 10</h3>
+                <ul>
+                    <li>Lunes</li>
+                    <li id="ej10-actual">Martes</li>
+                    <li>Miércoles</li>
+                    <li>Jueves</li>
+                </ul>
+                <p id="ej10-resultado"></p>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/soluciones.js"></script>
+</body>
+</html>

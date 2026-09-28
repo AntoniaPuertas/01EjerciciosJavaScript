@@ -22,6 +22,8 @@
     --color-texto: #ffffff;
     --color-acento: #f0c4ea;             /* enlaces en el texto y números del índice */
     --color-texto-atenuado: #b58fb0;     /* textos secundarios ("Solo ejemplos") */
+    --color-error: #ffb4ab;              /* avisos y valores negativos (suspensos) */
+    --color-texto-sobre-acento: #2b1029; /* texto encima de un fondo con el color de acento */
 
     /* Bloques de código */
     --color-codigo-fondo: #2d2d2d;
@@ -79,6 +81,8 @@
     --color-texto: #2b1029;
     --color-acento: #782e71;
     --color-texto-atenuado: #6b4a67;
+    --color-error: #b3261e;
+    --color-texto-sobre-acento: #ffffff;
 
     --sombra-codigo: 0 4px 10px rgba(43, 16, 41, 0.25);
     --sombra-superficie: 0 2px 6px rgba(43, 16, 41, 0.12);
@@ -304,4 +308,272 @@ ul li i {
 .boton-tema:focus-visible {
     outline: 3px solid var(--color-acento);
     outline-offset: 2px;
+}
+
+/* =========================================================
+   Zona de prácticas (tema 12 · DOM)
+   Elementos que los ejercicios modifican con JavaScript
+   ========================================================= */
+.zona-practica {
+    max-width: var(--ancho-contenido);
+    margin: var(--espacio-md) auto;
+    padding: var(--espacio-sm);
+    border: 2px dashed var(--color-borde);
+    border-radius: var(--radio-borde);
+}
+
+.zona-practica > h2 {
+    text-align: center;
+}
+
+.ejercicio {
+    margin-top: var(--espacio-sm);
+    padding: var(--espacio-sm);
+    background-color: var(--color-superficie);
+    border-left: 4px solid transparent;
+    border-radius: var(--radio-borde);
+    box-shadow: var(--sombra-superficie);
+}
+
+.ejercicio h3 {
+    font-size: var(--texto-tabla-cabecera);
+    color: var(--color-acento);
+    margin-bottom: var(--espacio-xs);
+}
+
+/* Dentro de los ejercicios, los párrafos y las listas se alinean a la izquierda
+   y las listas no llevan la caja de fondo de las listas de teoría */
+.ejercicio p {
+    text-align: left;
+    text-indent: 0;
+    margin: var(--espacio-xs) 0;
+}
+
+.ejercicio ul {
+    max-width: none;
+    margin: var(--espacio-xs) 0;
+    padding: 0 0 0 var(--espacio-md);
+    background: none;
+    box-shadow: none;
+    list-style-type: disc;
+    font-size: var(--texto-tabla);
+}
+
+.ejercicio ul li {
+    padding: 0.2rem 0;
+}
+
+/* Ejercicio 10: el contenedor marcado como resuelto */
+.ejercicio.resuelto {
+    border-left-color: var(--color-acento);
+}
+
+/* Ejercicio 3 */
+.caja {
+    padding: var(--espacio-sm);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-borde);
+    font-size: var(--texto-tabla);
+}
+
+.destacado {
+    background-color: var(--color-acento);
+    color: var(--color-texto-sobre-acento);
+    font-weight: bold;
+}
+
+/* Ejercicio 4 */
+.completada {
+    text-decoration: line-through;
+    color: var(--color-texto-atenuado);
+}
+
+/* Ejercicio 7 */
+.tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    gap: var(--espacio-sm);
+}
+
+.tarjeta {
+    padding: var(--espacio-sm);
+    background-color: var(--color-fondo);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-borde);
+}
+
+.tarjeta h4 {
+    font-size: var(--texto-tabla-cabecera);
+}
+
+/* Ejercicios 7 y 8 */
+.agotado {
+    color: var(--color-texto-atenuado);
+    border-style: dashed;
+}
+
+/* Las tarjetas tienen el fondo de la página: el texto atenuado no tendría contraste suficiente
+   en el tema oscuro, así que se mantiene el color normal y el aviso "Agotado" va en color de error */
+.tarjeta.agotado {
+    color: inherit;
+}
+
+.tarjeta.agotado > p:last-child {
+    color: var(--color-error);
+    font-weight: bold;
+}
+
+/* Ejercicio 9 */
+.tabla-practica {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--texto-tabla);
+}
+
+.tabla-practica th,
+.tabla-practica td {
+    padding: var(--relleno-celda);
+    text-align: left;
+    border-bottom: 1px solid var(--color-borde);
+}
+
+.tabla-practica th {
+    background-color: var(--color-superficie-oscura);
+    font-weight: normal;
+}
+
+.suspenso {
+    color: var(--color-error);
+    font-weight: bold;
+}
+
+/* Ejercicio 10 */
+.vecino {
+    color: var(--color-acento);
+    font-weight: bold;
+}
+
+/* =========================================================
+   Controles de la zona de prácticas (tema 13 · Eventos)
+   Botones, campos de formulario, mensajes y pestañas
+   ========================================================= */
+.boton {
+    padding: var(--relleno-boton);
+    border: 2px solid var(--color-acento);
+    border-radius: var(--radio-borde);
+    background-color: var(--color-acento);
+    color: var(--color-texto-sobre-acento);
+    font-family: var(--fuente-principal);
+    font-size: var(--texto-tabla);
+    cursor: pointer;
+}
+
+.boton:hover {
+    filter: brightness(1.1);
+}
+
+/* Botón secundario: solo borde, para acciones menos importantes */
+.boton-secundario {
+    background-color: transparent;
+    color: var(--color-texto);
+}
+
+.boton-secundario:hover {
+    background-color: var(--color-superficie-hover);
+    filter: none;
+}
+
+/* Contorno visible al navegar con el teclado en todos los controles */
+.boton:focus-visible,
+.campo:focus-visible,
+.pestana:focus-visible {
+    outline: 3px solid var(--color-acento);
+    outline-offset: 2px;
+}
+
+.grupo-botones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--espacio-xs);
+}
+
+.valor-contador {
+    min-width: 3rem;
+    text-align: center;
+    font-size: var(--texto-h2);
+}
+
+.etiqueta {
+    display: block;
+    margin-top: var(--espacio-xs);
+    font-size: var(--texto-tabla);
+}
+
+/* El borde usa el color atenuado: con --color-borde no se distinguiría
+   lo suficiente del fondo (las pautas WCAG piden un contraste mínimo de 3:1) */
+.campo {
+    display: block;
+    width: 100%;
+    max-width: 30rem;
+    margin: 0.3rem 0 var(--espacio-xs);
+    padding: var(--espacio-xs);
+    border: 1px solid var(--color-texto-atenuado);
+    border-radius: var(--radio-borde);
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: var(--fuente-principal);
+    font-size: var(--texto-tabla);
+}
+
+/* Ejercicio 5 */
+.cerca-limite {
+    color: var(--color-error);
+    font-weight: bold;
+}
+
+/* Ejercicio 7 */
+.lista-acciones li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--espacio-sm);
+    max-width: 30rem;
+}
+
+/* Ejercicio 9 */
+.mensaje-error {
+    color: var(--color-error);
+    font-weight: bold;
+}
+
+.mensaje-exito {
+    color: var(--color-acento);
+    font-weight: bold;
+}
+
+/* Ejercicio 10 */
+.pestanas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espacio-xs);
+    margin-bottom: var(--espacio-xs);
+}
+
+.pestana {
+    padding: var(--relleno-boton);
+    border: 1px solid var(--color-texto-atenuado);
+    border-radius: var(--radio-borde);
+    background-color: transparent;
+    color: var(--color-texto);
+    font-family: var(--fuente-principal);
+    font-size: var(--texto-tabla);
+    cursor: pointer;
+}
+
+/* La pestaña activa se reconoce por su atributo aria-selected */
+.pestana[aria-selected="true"] {
+    border-color: var(--color-acento);
+    background-color: var(--color-acento);
+    color: var(--color-texto-sobre-acento);
 }

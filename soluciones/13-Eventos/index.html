@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soluciones · Eventos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="../../assets/js/tema.js"></script>
+</head>
+<body>
+
+    <div class="contenido">
+        <nav class="navegacion">
+            <a href="../../index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Índice</a>
+            <a href="../../ejercicios/13-Eventos/index.html"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Volver a la teoría</a>
+        </nav>
+        <h1>Soluciones: Eventos</h1>
+        <p>Esta página ejecuta las soluciones de los 10 ejercicios de Eventos.</p>
+        <ul>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                Prueba la zona de prácticas de aquí abajo: haz clic en los botones, escribe en los campos, pulsa teclas y envía el formulario.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                Prueba también a usarla solo con el teclado (Tab para moverte y Enter o Espacio para pulsar): los botones y campos son accesibles.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                El código está en <code>soluciones/13-Eventos/js/soluciones.js</code>.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                Intenta resolver primero los ejercicios por tu cuenta: hay muchas soluciones correctas y la tuya no tiene por qué coincidir con esta.
+            </li>
+        </ul>
+
+        <section class="zona-practica" aria-labelledby="titulo-zona-practica">
+            <h2 id="titulo-zona-practica">Zona de prácticas</h2>
+            <p>Los ejercicios hacen que estos elementos respondan a lo que haces: clics, teclas, textos... Mientras no los resuelvas, no harán nada.</p>
+
+            <div class="ejercicio" id="ej1">
+                <h3>Ejercicio 1</h3>
+                <button type="button" class="boton" id="ej1-boton">Haz clic aquí</button>
+                <p id="ej1-mensaje">Todavía no has hecho clic.</p>
+            </div>
+
+            <div class="ejercicio" id="ej2">
+                <h3>Ejercicio 2</h3>
+                <div class="grupo-botones">
+                    <button type="button" class="boton" id="ej2-restar" aria-label="Restar uno">−</button>
+                    <output id="ej2-valor" class="valor-contador" aria-live="polite">0</output>
+                    <button type="button" class="boton" id="ej2-sumar" aria-label="Sumar uno">+</button>
+                    <button type="button" class="boton boton-secundario" id="ej2-reiniciar">Reiniciar</button>
+                </div>
+            </div>
+
+            <div class="ejercicio" id="ej3">
+                <h3>Ejercicio 3</h3>
+                <button type="button" class="boton" id="ej3-boton" aria-expanded="false" aria-controls="ej3-panel">Mostrar detalles</button>
+                <div id="ej3-panel" class="caja" hidden>
+                    Este panel estaba oculto con el atributo hidden.
+                </div>
+            </div>
+
+            <div class="ejercicio" id="ej4">
+                <h3>Ejercicio 4</h3>
+                <label class="etiqueta" for="ej4-nombre">Tu nombre</label>
+                <input class="campo" type="text" id="ej4-nombre" autocomplete="given-name">
+                <p id="ej4-saludo">Escribe tu nombre</p>
+            </div>
+
+            <div class="ejercicio" id="ej5">
+                <h3>Ejercicio 5</h3>
+                <label class="etiqueta" for="ej5-texto">Mensaje (máximo 100 caracteres)</label>
+                <textarea class="campo" id="ej5-texto" maxlength="100" rows="3"></textarea>
+                <p id="ej5-contador">0 / 100</p>
+            </div>
+
+            <div class="ejercicio" id="ej6">
+                <h3>Ejercicio 6</h3>
+                <label class="etiqueta" for="ej6-envio">Tipo de envío</label>
+                <select class="campo" id="ej6-envio">
+                    <option value="estandar">Estándar (3-5 días)</option>
+                    <option value="urgente">Urgente (24 horas)</option>
+                    <option value="recogida">Recogida en tienda</option>
+                </select>
+                <p id="ej6-precio">Coste del envío: —</p>
+            </div>
+
+            <div class="ejercicio" id="ej7">
+                <h3>Ejercicio 7</h3>
+                <ul id="ej7-lista" class="lista-acciones">
+                    <li><span>Comprar pan</span> <button type="button" class="boton boton-secundario">Eliminar</button></li>
+                    <li><span>Llamar al dentista</span> <button type="button" class="boton boton-secundario">Eliminar</button></li>
+                    <li><span>Estudiar eventos</span> <button type="button" class="boton boton-secundario">Eliminar</button></li>
+                    <li><span>Regar las plantas</span> <button type="button" class="boton boton-secundario">Eliminar</button></li>
+                </ul>
+                <p id="ej7-total">Quedan 4 tareas</p>
+            </div>
+
+            <div class="ejercicio" id="ej8">
+                <h3>Ejercicio 8</h3>
+                <p>Pulsa cualquier tecla (sin estar escribiendo en un campo).</p>
+                <p id="ej8-tecla" class="caja">Esperando una tecla...</p>
+            </div>
+
+            <div class="ejercicio" id="ej9">
+                <h3>Ejercicio 9</h3>
+                <form id="ej9-form" novalidate>
+                    <label class="etiqueta" for="ej9-nombre">Nombre</label>
+                    <input class="campo" type="text" id="ej9-nombre" name="nombre" autocomplete="name">
+                    <label class="etiqueta" for="ej9-email">Correo electrónico</label>
+                    <input class="campo" type="email" id="ej9-email" name="email" autocomplete="email">
+                    <button type="submit" class="boton">Enviar</button>
+                </form>
+                <p id="ej9-resultado" aria-live="polite"></p>
+            </div>
+
+            <div class="ejercicio" id="ej10">
+                <h3>Ejercicio 10</h3>
+                <div class="pestanas" id="ej10-pestanas" role="tablist" aria-label="Información del curso">
+                    <button type="button" class="pestana" role="tab" id="ej10-tab-temario" aria-selected="true" aria-controls="ej10-temario" data-panel="ej10-temario">Temario</button>
+                    <button type="button" class="pestana" role="tab" id="ej10-tab-horario" aria-selected="false" aria-controls="ej10-horario" data-panel="ej10-horario">Horario</button>
+                    <button type="button" class="pestana" role="tab" id="ej10-tab-precio" aria-selected="false" aria-controls="ej10-precio" data-panel="ej10-precio">Precio</button>
+                </div>
+                <div class="caja" role="tabpanel" id="ej10-temario" aria-labelledby="ej10-tab-temario">Variables, funciones, DOM, eventos y asincronía.</div>
+                <div class="caja" role="tabpanel" id="ej10-horario" aria-labelledby="ej10-tab-horario" hidden>De lunes a jueves, de 17:00 a 20:00.</div>
+                <div class="caja" role="tabpanel" id="ej10-precio" aria-labelledby="ej10-tab-precio" hidden>Gratuito para el alumnado del centro.</div>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/soluciones.js"></script>
+</body>
+</html>

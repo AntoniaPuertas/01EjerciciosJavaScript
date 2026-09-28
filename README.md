@@ -21,10 +21,10 @@ Cada tema tiene una página de **teoría** con ejemplos y una serie de **ejercic
 | 07 | Objetos | Crear objetos, leer y modificar sus propiedades, métodos, `this` y JSON | 9 |
 | 08 | Arrays | Añadir, quitar, buscar, ordenar y transformar elementos con `map`, `filter` y `reduce` | 10 |
 | 09 | Condicionales | `if` y `else`, `switch`, el operador ternario, valores truthy y falsy, `??` y `?.` | 10 |
-| 10 | Bucles | `for`, `while`, `do...while`, `for...of` y `for...in`, `break` y `continue` | 🚧 Próximamente |
-| 11 | Funciones | Declarar funciones, parámetros, `return`, funciones flecha y ámbito de las variables | 🚧 Próximamente |
-| 12 | DOM | Seleccionar elementos de la página, cambiar su contenido y sus estilos, crear y eliminar elementos | 🚧 Próximamente |
-| 13 | Eventos | Responder a clics, teclas y formularios con `addEventListener` | 🚧 Próximamente |
+| 10 | Bucles | `for`, `while`, `do...while`, `for...of` y `for...in`, `break` y `continue`, bucles anidados | 10 |
+| 11 | Funciones | Declarar funciones, parámetros, `return`, funciones flecha, ámbito de las variables, callbacks y recursividad | 10 |
+| 12 | DOM | Seleccionar elementos de la página, cambiar su contenido, sus atributos y sus estilos, crear y eliminar elementos | 10 |
+| 13 | Eventos | Responder a clics, teclas y formularios con `addEventListener`, validar formularios y delegación de eventos | 10 |
 | 14 | Asincronía | Temporizadores, promesas, `async` / `await` y pedir datos con `fetch` | 🚧 Próximamente |
 
 ---
@@ -75,7 +75,9 @@ Cada tema tiene una página de **teoría** con ejemplos y una serie de **ejercic
 - **Si algo no funciona, mira la consola.** Los errores aparecen en rojo e indican el archivo y la línea donde está el problema.
 - **Usa `console.log()`** para ver el valor de tus variables mientras programas.
 - **Si un ejercicio usa `prompt()`**, aparecerá una ventana pidiendo datos cada vez que recargues la página. Cuando lo termines, puedes comentar esa llamada para que no te moleste mientras haces los siguientes.
+- **Si la página se queda bloqueada** en el tema de Bucles, seguramente has escrito un bucle infinito: cierra la pestaña, comprueba que la variable de la condición cambia en cada vuelta y vuelve a abrirla.
 - **En el tema de Arrays** cada ejercicio va dentro de una función. Escribe tu código dentro de ella: así tus variables no chocan con las de los ejemplos de ese tema.
+- **En los temas del DOM y de Eventos** los ejercicios cambian la propia página: los resultados se ven en la **Zona de prácticas** que hay al final de la teoría. En Eventos, además, tienes que interactuar con ella (hacer clic, escribir, pulsar teclas) para comprobar que tu código funciona.
 - **¿Prefieres otros colores?** El botón de la esquina superior derecha cambia entre tema claro y oscuro, y la página recuerda tu elección.
 
 ---

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bucles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="../../assets/js/tema.js"></script>
+</head>
+<body>
+
+    <div class="contenido">
+        <nav class="navegacion">
+            <a href="../../index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Índice</a>
+            <a href="../../soluciones/10-Bucles/index.html"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Ver soluciones</a>
+        </nav>
+        <h1>Bucles</h1>
+        <p>Un bucle repite un bloque de código mientras se cumpla una condición. Sirve para no escribir lo mismo muchas veces: mostrar los números del 1 al 100, recorrer todos los elementos de un array o pedir un dato hasta que sea válido.</p>
+        <p>Cada repetición se llama <strong>iteración</strong> o vuelta. JavaScript tiene varios tipos de bucle y cada uno encaja mejor en una situación distinta.</p>
+
+        <h2>for</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Estructura</strong>: tiene tres partes separadas por punto y coma: la <strong>inicialización</strong> (se ejecuta una vez al principio), la <strong>condición</strong> (se comprueba antes de cada vuelta) y la <strong>actualización</strong> (se ejecuta al final de cada vuelta). Es el bucle adecuado cuando sabes cuántas vueltas quieres dar.
+                <div class="code-container"><pre><code>for (let i = 1; i &lt;= 5; i++) {
+    console.log(`Vuelta número ${i}`);
+}
+// Vuelta número 1 ... Vuelta número 5</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Contar hacia atrás o de otro modo</strong>: basta con cambiar la inicialización, la condición y la actualización.
+                <div class="code-container"><pre><code>for (let i = 10; i >= 0; i -= 2) {
+    console.log(i); // 10, 8, 6, 4, 2, 0
+}</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Recorrer un array con su índice</strong>: el índice va de <code>0</code> a <code>length - 1</code>, por eso la condición usa <code>&lt;</code> y no <code>&lt;=</code>.
+                <div class="code-container"><pre><code>const frutas = ['manzana', 'pera', 'uva'];
+for (let i = 0; i &lt; frutas.length; i++) {
+    console.log(`${i}: ${frutas[i]}`);
+}</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Acumuladores y contadores</strong>: son variables que se declaran antes del bucle y se actualizan en cada vuelta para sumar, contar o construir un resultado.
+                <div class="code-container"><pre><code>let total = 0;
+for (let i = 1; i &lt;= 4; i++) {
+    total += i;
+}
+console.log(total); // 10 (1 + 2 + 3 + 4)</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>while y do...while</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>while</strong>: repite el bloque mientras la condición sea verdadera. Se usa cuando no sabes de antemano cuántas vueltas hacen falta. Si la condición es falsa desde el principio, no da ninguna vuelta.
+                <div class="code-container"><pre><code>let dinero = 100;
+let meses = 0;
+while (dinero &lt; 200) {
+    dinero *= 1.1; // crece un 10 % cada mes
+    meses++;
+}
+console.log(`Se duplica en ${meses} meses`); // 8</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>do...while</strong>: comprueba la condición al final, así que el bloque se ejecuta <strong>al menos una vez</strong>. Es útil cuando primero hay que hacer algo y después decidir si se repite, como pedir un dato hasta que sea válido.
+                <div class="code-container"><pre><code>let edad;
+do {
+    edad = Number(prompt('¿Cuántos años tienes?'));
+} while (Number.isNaN(edad) || edad &lt; 0);</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Bucles infinitos</strong>: si la condición nunca llega a ser falsa, el bucle no termina y la página se bloquea. Comprueba siempre que la variable de la condición cambia dentro del bucle.
+                <div class="code-container"><pre><code>let i = 0;
+while (i &lt; 5) {
+    console.log(i);
+    // Falta i++: i siempre vale 0 y el bucle no termina nunca
+}</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>for...of y for...in</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>for...of</strong>: recorre directamente los <strong>valores</strong> de algo recorrible: un array, un string, un <code>Set</code>... Es la forma más clara cuando no necesitas el índice.
+                <div class="code-container"><pre><code>for (const fruta of ['manzana', 'pera', 'uva']) {
+    console.log(fruta);
+}
+for (const letra of 'hola') {
+    console.log(letra); // h, o, l, a
+}</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>for...in</strong>: recorre las <strong>claves</strong> (nombres de las propiedades) de un objeto.
+                <div class="code-container"><pre><code>const persona = { nombre: 'Ana', edad: 28 };
+for (const clave in persona) {
+    console.log(`${clave}: ${persona[clave]}`);
+}
+// nombre: Ana
+// edad: 28</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>No uses for...in con arrays</strong>: devuelve los índices como texto (<code>'0'</code>, <code>'1'</code>...), no los valores. Para arrays usa <code>for...of</code>, un <code>for</code> clásico o los métodos de arrays.
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Object.entries() con for...of</strong>: convierte un objeto en pares <code>[clave, valor]</code> que se pueden recorrer y desestructurar.
+                <div class="code-container"><pre><code>for (const [clave, valor] of Object.entries(persona)) {
+    console.log(`${clave}: ${valor}`);
+}</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>break y continue</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>break</strong>: termina el bucle en ese momento. Se usa, por ejemplo, para dejar de buscar cuando ya se ha encontrado lo que se buscaba.
+                <div class="code-container"><pre><code>const numeros = [4, 9, 15, 22, 8];
+for (const n of numeros) {
+    if (n > 10) {
+        console.log(`El primero mayor que 10 es ${n}`); // 15
+        break;
+    }
+}</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>continue</strong>: salta el resto de la vuelta actual y pasa directamente a la siguiente.
+                <div class="code-container"><pre><code>for (let i = 1; i &lt;= 10; i++) {
+    if (i % 3 === 0) {
+        continue; // se salta los múltiplos de 3
+    }
+    console.log(i); // 1, 2, 4, 5, 7, 8, 10
+}</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>return dentro de una función</strong>: sale del bucle y de la función a la vez.
+            </li>
+        </ul>
+
+        <h2>Bucles anidados</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Un bucle dentro de otro</strong>: por cada vuelta del bucle exterior, el interior da todas sus vueltas. Se usan para recorrer tablas, cuadrículas o combinaciones.
+                <div class="code-container"><pre><code>for (let fila = 1; fila &lt;= 3; fila++) {
+    let linea = '';
+    for (let col = 1; col &lt;= 3; col++) {
+        linea += `${fila * col}\t`;
+    }
+    console.log(linea);
+}
+// 1  2  3
+// 2  4  6
+// 3  6  9</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Nombres de variables distintos</strong>: cada bucle necesita su propia variable (<code>fila</code> y <code>col</code>, o <code>i</code> y <code>j</code>). Si usas la misma, el bucle interior modifica la del exterior.
+            </li>
+        </ul>
+
+        <h2>¿Qué bucle elijo?</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Sabes cuántas vueltas quieres dar</strong> o necesitas el índice: <code>for</code>.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Repetir mientras se cumpla una condición</strong>, sin saber cuántas vueltas: <code>while</code>.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Hacer algo al menos una vez</strong> y luego decidir si se repite: <code>do...while</code>.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Recorrer los valores</strong> de un array o un string: <code>for...of</code>.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Recorrer las propiedades</strong> de un objeto: <code>for...in</code> u <code>Object.entries()</code> con <code>for...of</code>.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Transformar, filtrar o sumar un array</strong>: muchas veces es más claro usar los métodos del tema de Arrays (<code>map</code>, <code>filter</code>, <code>reduce</code>, <code>find</code>...), que ya recorren el array por dentro.
+                <div class="code-container"><pre><code>const precios = [10, 20, 30];
+
+// Con un bucle
+const conIva = [];
+for (const p of precios) {
+    conIva.push(p * 1.21);
+}
+
+// Con un método de arrays: el mismo resultado en una línea
+const conIva2 = precios.map(p => p * 1.21);</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Practica</h2>
+        <p>En <code>js/ejercicios.js</code> tienes 10 ejercicios sobre todo lo anterior. Abre la consola (<code>F12</code>) para ver los resultados, separados por encabezados <code>--- Ejercicio N ---</code>. Cuando termines, compáralos con las <a href="../../soluciones/10-Bucles/index.html">soluciones</a>.</p>
+
+    </div>
+
+    <script src="js/ejercicios.js"></script>
+
+</body>
+</html>

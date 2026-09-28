@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funciones</title>
+    <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="../../assets/js/tema.js"></script>
+</head>
+<body>
+
+    <div class="contenido">
+        <nav class="navegacion">
+            <a href="../../index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Índice</a>
+            <a href="../../soluciones/11-Funciones/index.html"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Ver soluciones</a>
+        </nav>
+        <h1>Funciones</h1>
+        <p>Una función es un bloque de código con nombre que realiza una tarea concreta. Se escribe una vez y se puede ejecutar (<strong>llamar</strong>) tantas veces como haga falta, con datos distintos cada vez.</p>
+        <p>Las funciones permiten organizar el código en piezas pequeñas, evitar repeticiones y darle un nombre a cada tarea para que el programa se entienda mejor.</p>
+
+        <h2>Declarar y llamar una función</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Declaración y llamada</strong>: se declara con <code>function</code>, un nombre y unos paréntesis. Declararla no la ejecuta: hay que llamarla escribiendo su nombre seguido de paréntesis.
+                <div class="code-container"><pre><code>function mostrarBienvenida() {
+    console.log('¡Bienvenido al curso!');
+}
+
+mostrarBienvenida(); // ¡Bienvenido al curso!
+mostrarBienvenida(); // se puede llamar las veces que haga falta</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Parámetros y argumentos</strong>: los <strong>parámetros</strong> son las variables que aparecen en la declaración; los <strong>argumentos</strong> son los valores concretos que se pasan al llamarla.
+                <div class="code-container"><pre><code>function saludar(nombre, curso) {  // nombre y curso son parámetros
+    console.log(`Hola, ${nombre}. Bienvenido a ${curso}`);
+}
+
+saludar('Ana', 'JavaScript'); // 'Ana' y 'JavaScript' son argumentos</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>return</strong>: devuelve un resultado a quien llamó a la función y la termina en ese momento. El código que haya después no se ejecuta.
+                <div class="code-container"><pre><code>function sumar(a, b) {
+    return a + b;
+    console.log('Esto no se ejecuta nunca');
+}
+
+const resultado = sumar(3, 4);
+console.log(resultado); // 7</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Sin return</strong>: una función que no tiene <code>return</code> devuelve <code>undefined</code>. Mostrar algo con <code>console.log()</code> no es lo mismo que devolverlo.
+                <div class="code-container"><pre><code>function mostrarDoble(n) {
+    console.log(n * 2);
+}
+
+const valor = mostrarDoble(5); // muestra 10
+console.log(valor);            // undefined: la función no devolvió nada</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Tres formas de crear funciones</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Declaración de función</strong>: la forma clásica. Se puede llamar incluso antes de la línea donde está escrita, porque JavaScript la "sube" al principio (a esto se le llama <em>hoisting</em>).
+                <div class="code-container"><pre><code>console.log(cuadrado(4)); // 16: funciona aunque esté declarada más abajo
+
+function cuadrado(n) {
+    return n * n;
+}</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Expresión de función</strong>: la función se guarda en una variable. Solo se puede usar después de esa línea.
+                <div class="code-container"><pre><code>const cubo = function (n) {
+    return n * n * n;
+};
+
+console.log(cubo(2)); // 8</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Función flecha</strong>: una forma más corta de escribir expresiones de función. Si el cuerpo es una sola expresión, se pueden quitar las llaves y el <code>return</code>. Con un solo parámetro, también los paréntesis.
+                <div class="code-container"><pre><code>const sumar = (a, b) => a + b;
+const doble = n => n * 2;
+const saludo = () => 'Hola';
+
+// Con varias líneas se necesitan llaves y return
+const precioConIva = (precio) => {
+    const iva = precio * 0.21;
+    return precio + iva;
+};</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Devolver un objeto con una flecha</strong>: hay que rodearlo de paréntesis; si no, JavaScript confunde las llaves del objeto con las del cuerpo de la función.
+                <div class="code-container"><pre><code>const crearPunto = (x, y) => ({ x, y });
+console.log(crearPunto(2, 5)); // { x: 2, y: 5 }</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Flechas y this</strong>: las funciones flecha no tienen su propio <code>this</code>. Por eso, para los métodos de un objeto se usa la sintaxis de método normal.
+                <div class="code-container"><pre><code>const persona = {
+    nombre: 'Ana',
+    saludar() { return `Soy ${this.nombre}`; },      // correcto
+    saludarFlecha: () => `Soy ${this.nombre}`,       // this no es persona
+};
+console.log(persona.saludar()); // Soy Ana</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Parámetros</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Argumentos que faltan o sobran</strong>: si se pasan menos argumentos, los parámetros que faltan valen <code>undefined</code>. Si se pasan más, se ignoran.
+                <div class="code-container"><pre><code>function presentar(nombre, edad) {
+    return `${nombre} tiene ${edad} años`;
+}
+console.log(presentar('Luis')); // Luis tiene undefined años</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Valores por defecto</strong>: se usan cuando el argumento no se pasa.
+                <div class="code-container"><pre><code>function presentar(nombre, edad = 18) {
+    return `${nombre} tiene ${edad} años`;
+}
+console.log(presentar('Luis'));     // Luis tiene 18 años
+console.log(presentar('Luis', 25)); // Luis tiene 25 años</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Parámetro rest (...)</strong>: reúne en un array todos los argumentos restantes. Permite crear funciones que aceptan cualquier cantidad de valores. Solo puede haber uno y tiene que ir al final.
+                <div class="code-container"><pre><code>function mayor(...numeros) {
+    return Math.max(...numeros);
+}
+console.log(mayor(3, 9, 4));        // 9
+console.log(mayor(10, 2, 35, 7, 1)); // 35</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Un objeto como parámetro</strong>: cuando una función necesita muchos datos, es más claro pasar un objeto y desestructurarlo. Así el orden de los argumentos no importa.
+                <div class="code-container"><pre><code>function crearUsuario({ nombre, email, rol = 'alumno' }) {
+    return `${nombre} (${email}) - ${rol}`;
+}
+console.log(crearUsuario({ email: 'ana@ejemplo.com', nombre: 'Ana' }));
+// Ana (ana@ejemplo.com) - alumno</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Ámbito de las variables</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Ámbito (scope)</strong>: es la zona del código donde una variable existe y se puede usar. Las variables declaradas dentro de una función son <strong>locales</strong>: no se ven desde fuera.
+                <div class="code-container"><pre><code>function calcular() {
+    const secreto = 42;
+    console.log(secreto); // 42
+}
+calcular();
+console.log(secreto); // ReferenceError: secreto is not defined</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Ámbito de bloque</strong>: <code>let</code> y <code>const</code> solo existen dentro de las llaves donde se declaran (un <code>if</code>, un bucle...).
+                <div class="code-container"><pre><code>if (true) {
+    const mensaje = 'dentro';
+}
+console.log(mensaje); // ReferenceError</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Desde dentro se ve lo de fuera</strong>: una función puede leer las variables del ámbito que la rodea, pero no al revés. Aun así, es mejor que una función reciba lo que necesita por parámetro en lugar de depender de variables globales.
+            </li>
+        </ul>
+
+        <h2>Funciones como valores</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Callbacks</strong>: en JavaScript una función es un valor más, así que se puede pasar como argumento a otra función. Ya lo has hecho con <code>forEach</code>, <code>map</code> o <code>filter</code>. Para pasarla se escribe su nombre <strong>sin paréntesis</strong>.
+                <div class="code-container"><pre><code>const esPar = n => n % 2 === 0;
+console.log([1, 2, 3, 4].filter(esPar)); // [2, 4]
+// filter(esPar()) sería un error: pasaría el resultado, no la función</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Funciones que devuelven funciones</strong>: una función puede crear y devolver otra función.
+                <div class="code-container"><pre><code>function crearSaludo(saludo) {
+    return nombre => `${saludo}, ${nombre}`;
+}
+const saludoFormal = crearSaludo('Buenos días');
+console.log(saludoFormal('Sra. López')); // Buenos días, Sra. López</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Closures</strong>: la función devuelta "recuerda" las variables del lugar donde se creó, aunque la función que la creó ya haya terminado. En el ejemplo anterior, <code>saludoFormal</code> sigue recordando <code>'Buenos días'</code>. Sirven, por ejemplo, para crear datos privados que solo se pueden cambiar a través de ciertas funciones.
+            </li>
+        </ul>
+
+        <h2>Recursividad</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Una función que se llama a sí misma</strong>: resuelve un problema dividiéndolo en versiones más pequeñas del mismo problema. Siempre necesita un <strong>caso base</strong> que detenga las llamadas; sin él, la función se llamaría sin fin y el navegador daría un error.
+                <div class="code-container"><pre><code>function cuentaAtras(n) {
+    if (n === 0) {           // caso base
+        console.log('¡Despegue!');
+        return;
+    }
+    console.log(n);
+    cuentaAtras(n - 1);      // llamada recursiva con un problema más pequeño
+}
+cuentaAtras(3); // 3, 2, 1, ¡Despegue!</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Buenas prácticas</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Nombres con verbo</strong> que digan lo que hace la función: <code>calcularTotal</code>, <code>validarEmail</code>, <code>mostrarError</code>. Si devuelve un booleano, suele empezar por <code>es</code> o <code>tiene</code>: <code>esPar</code>, <code>tieneStock</code>.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Una función, una tarea</strong>: si al describirla necesitas decir "y además...", probablemente conviene dividirla en dos.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Funciones puras</strong>: siempre que puedas, escribe funciones que, con los mismos argumentos, devuelvan siempre el mismo resultado y no modifiquen nada de fuera (variables globales, arrays u objetos recibidos). Son más fáciles de probar y de entender.
+                <div class="code-container"><pre><code>// Impura: modifica el array que recibe
+function anadirImpura(lista, elemento) {
+    lista.push(elemento);
+}
+
+// Pura: devuelve un array nuevo y no toca el original
+const anadir = (lista, elemento) => [...lista, elemento];</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Cláusulas de guarda</strong>: comprueba al principio los casos no válidos y sal con <code>return</code>, como viste en el tema de Condicionales.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Documenta las funciones importantes</strong> con un comentario JSDoc. Editores como VS Code lo muestran al escribir la llamada.
+                <div class="code-container"><pre><code>/**
+ * Calcula el precio con IVA.
+ * @param {number} precio - Precio sin IVA.
+ * @param {number} [iva=21] - Porcentaje de IVA.
+ * @returns {number} Precio con IVA.
+ */
+function conIva(precio, iva = 21) {
+    return precio * (1 + iva / 100);
+}</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Practica</h2>
+        <p>En <code>js/ejercicios.js</code> tienes 10 ejercicios sobre todo lo anterior. Abre la consola (<code>F12</code>) para ver los resultados, separados por encabezados <code>--- Ejercicio N ---</code>. Cuando termines, compáralos con las <a href="../../soluciones/11-Funciones/index.html">soluciones</a>.</p>
+
+    </div>
+
+    <script src="js/ejercicios.js"></script>
+
+</body>
+</html>

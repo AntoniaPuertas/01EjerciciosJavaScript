@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="../../assets/js/tema.js"></script>
+</head>
+<body>
+
+    <div class="contenido">
+        <nav class="navegacion">
+            <a href="../../index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Índice</a>
+            <a href="../../soluciones/13-Eventos/index.html"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Ver soluciones</a>
+        </nav>
+        <h1>Eventos</h1>
+        <p>Un evento es algo que ocurre en la página: el usuario hace clic, escribe en un campo, pulsa una tecla o envía un formulario. JavaScript puede "escuchar" esos eventos y ejecutar una función cada vez que ocurren.</p>
+        <p>Los eventos son lo que convierte una página en una aplicación interactiva: juntan todo lo visto hasta ahora (funciones, condicionales y el DOM) para responder a lo que hace el usuario.</p>
+
+        <h2>Escuchar eventos</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>addEventListener(tipo, función)</strong>: indica qué función se ejecutará cuando ocurra un evento en un elemento. A esa función se le llama <strong>listener</strong> o manejador.
+                <div class="code-container"><pre><code>const boton = document.querySelector('#saludar');
+
+boton.addEventListener('click', () => {
+    console.log('¡Hola!');
+});</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Se pasa la función, no se llama</strong>: si la función tiene nombre, se escribe sin paréntesis. Con paréntesis se ejecutaría en ese mismo momento, al cargar la página, en lugar de al hacer clic.
+                <div class="code-container"><pre><code>function saludar() {
+    console.log('¡Hola!');
+}
+boton.addEventListener('click', saludar);    // correcto
+boton.addEventListener('click', saludar());  // error: se ejecuta ya y pasa undefined</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Evita onclick en el HTML</strong>: es posible escribir <code>&lt;button onclick="saludar()"&gt;</code>, pero mezcla HTML y JavaScript y solo permite un manejador por evento. Con <code>addEventListener</code> el código queda en el archivo <code>.js</code> y se pueden añadir varios.
+            </li>
+        </ul>
+
+        <h2>Eventos más habituales</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Ratón y pantalla táctil</strong>: <code>click</code>, <code>dblclick</code>, <code>mouseenter</code> y <code>mouseleave</code> (el puntero entra o sale de un elemento). Los eventos <code>pointerdown</code>, <code>pointermove</code> y <code>pointerup</code> funcionan igual con ratón, dedo o lápiz.
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Teclado</strong>: <code>keydown</code> (se pulsa una tecla) y <code>keyup</code> (se suelta). La tecla está en <code>event.key</code>.
+                <div class="code-container"><pre><code>document.addEventListener('keydown', (evento) => {
+    if (evento.key === 'Escape') {
+        console.log('Has pulsado Escape');
+    }
+});</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Formularios</strong>: <code>input</code> (cambia el contenido de un campo, con cada tecla), <code>change</code> (se confirma un cambio: al elegir en un <code>select</code> o al salir de un campo), <code>submit</code> (se envía el formulario), <code>focus</code> y <code>blur</code> (un campo recibe o pierde el foco).
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Página y ventana</strong>: <code>DOMContentLoaded</code> (el HTML ya está listo), <code>scroll</code> (se desplaza la página) y <code>resize</code> (cambia el tamaño de la ventana).
+            </li>
+        </ul>
+
+        <h2>El objeto evento</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Información sobre lo que ha pasado</strong>: el navegador pasa a la función un objeto con los detalles del evento. Por convención se llama <code>evento</code>, <code>event</code> o <code>e</code>.
+                <div class="code-container"><pre><code>campo.addEventListener('input', (evento) => {
+    console.log(evento.type);         // 'input'
+    console.log(evento.target);       // el elemento donde ocurrió
+    console.log(evento.target.value); // lo que hay escrito en el campo
+});</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>target y currentTarget</strong>: <code>target</code> es el elemento exacto donde ocurrió el evento (por ejemplo, un icono dentro de un botón); <code>currentTarget</code> es el elemento que tiene el listener.
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>preventDefault()</strong>: cancela la acción que el navegador haría por su cuenta, como seguir un enlace o recargar la página al enviar un formulario.
+                <div class="code-container"><pre><code>enlace.addEventListener('click', (evento) => {
+    evento.preventDefault(); // el enlace ya no lleva a otra página
+    console.log('Enlace pulsado');
+});</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Formularios</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Escucha submit en el formulario</strong>, no el clic del botón: así también funciona cuando se pulsa Enter en un campo. Llama a <code>preventDefault()</code> para que la página no se recargue.
+                <div class="code-container"><pre><code>const formulario = document.querySelector('#registro');
+
+formulario.addEventListener('submit', (evento) => {
+    evento.preventDefault();
+    console.log('Formulario enviado sin recargar la página');
+});</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>FormData</strong>: recoge de una vez todos los campos que tienen atributo <code>name</code>. Con <code>Object.fromEntries()</code> se convierte en un objeto normal.
+                <div class="code-container"><pre><code>// &lt;input name="nombre"&gt;  &lt;input name="email"&gt;
+const datos = Object.fromEntries(new FormData(formulario));
+console.log(datos); // { nombre: 'Ana', email: 'ana@ejemplo.com' }</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Validación con HTML</strong>: atributos como <code>required</code>, <code>type="email"</code>, <code>minlength</code> o <code>pattern</code> hacen que el navegador compruebe los datos. Desde JavaScript, la propiedad <code>validity</code> de cada campo dice si su contenido es válido.
+                <div class="code-container"><pre><code>const email = formulario.elements.email;
+console.log(email.validity.valid);   // false si no tiene formato de correo
+console.log(formulario.checkValidity()); // true solo si todos los campos son válidos</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>reset()</strong>: vacía el formulario y deja los campos con sus valores iniciales.
+            </li>
+        </ul>
+
+        <h2>Propagación y delegación de eventos</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Los eventos "suben"</strong>: cuando haces clic en un botón que está dentro de una lista, el evento se produce primero en el botón y después sube por sus antepasados: el <code>li</code>, el <code>ul</code>, el <code>body</code>... A esto se le llama <strong>propagación</strong> o <em>bubbling</em>.
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Delegación de eventos</strong>: en lugar de poner un listener en cada botón, se pone uno solo en el contenedor y se mira con <code>event.target</code> qué se ha pulsado. Tiene dos ventajas: menos listeners y funciona también con los elementos que se añadan más tarde.
+                <div class="code-container"><pre><code>const lista = document.querySelector('#carrito');
+
+lista.addEventListener('click', (evento) => {
+    const boton = evento.target.closest('.eliminar');
+    if (!boton) {
+        return; // el clic no ha sido en un botón Eliminar
+    }
+    boton.closest('li').remove();
+});</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>stopPropagation()</strong>: impide que el evento siga subiendo. Úsalo con cuidado: puede romper la delegación de otras partes de la página.
+            </li>
+        </ul>
+
+        <h2>Dejar de escuchar</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>removeEventListener()</strong>: quita un listener. Necesita la misma función que se usó al añadirlo, así que no sirve con funciones escritas directamente dentro de <code>addEventListener</code>.
+                <div class="code-container"><pre><code>function mostrarPosicion(evento) {
+    console.log(evento.clientX, evento.clientY);
+}
+document.addEventListener('pointermove', mostrarPosicion);
+document.removeEventListener('pointermove', mostrarPosicion);</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Opción once</strong>: el listener se ejecuta una sola vez y después se elimina solo.
+                <div class="code-container"><pre><code>boton.addEventListener('click', () => {
+    console.log('Solo se muestra la primera vez');
+}, { once: true });</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>AbortController</strong>: permite quitar varios listeners a la vez, aunque sus funciones no tengan nombre.
+                <div class="code-container"><pre><code>const controlador = new AbortController();
+boton.addEventListener('click', () => console.log('clic'), { signal: controlador.signal });
+campo.addEventListener('input', () => console.log('input'), { signal: controlador.signal });
+
+controlador.abort(); // elimina los dos listeners</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Accesibilidad</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Usa &lt;button&gt; para todo lo que se pulsa</strong>, no un <code>div</code> o un <code>span</code>. Un botón se puede usar con el teclado (Tab para llegar y Enter o Espacio para pulsar) y los lectores de pantalla lo anuncian como botón; un <code>div</code> con un listener de clic, no.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Pon type="button"</strong> a los botones que no envían un formulario. Dentro de un <code>form</code>, un botón sin tipo es de tipo <code>submit</code> y lo enviaría.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Informa de los cambios</strong>: si un botón muestra u oculta contenido, actualiza su atributo <code>aria-expanded</code>. Los mensajes que aparecen tras una acción pueden ir en un elemento con <code>aria-live="polite"</code> para que el lector de pantalla los lea.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Asocia cada campo a su etiqueta</strong> con <code>&lt;label for="id-del-campo"&gt;</code>. Además, al pulsar en la etiqueta el campo recibe el foco.
+            </li>
+        </ul>
+
+        <h2>Buenas prácticas</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Selecciona los elementos una vez</strong>, fuera del listener, y guárdalos en variables.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Mantén los listeners cortos</strong>: si hacen muchas cosas, mueve el trabajo a funciones con nombre.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Usa delegación</strong> para listas y elementos que se crean dinámicamente.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Valida siempre en el servidor también</strong>: la validación en el navegador mejora la experiencia, pero cualquiera puede saltársela.
+            </li>
+        </ul>
+
+        <h2>Practica</h2>
+        <p>En <code>js/ejercicios.js</code> tienes 10 ejercicios que dan vida a la zona de prácticas de aquí abajo. Guarda el archivo, recarga la página y prueba a hacer clic, escribir o pulsar teclas. Cuando termines, compáralos con las <a href="../../soluciones/13-Eventos/index.html">soluciones</a>.</p>
+
+        <section class="zona-practica" aria-labelledby="titulo-zona-practica">
+            <h2 id="titulo-zona-practica">Zona de prácticas</h2>
+            <p>Los ejercicios hacen que estos elementos respondan a lo que haces: clics, teclas, textos... Mientras no los resuelvas, no harán nada.</p>
+
+            <div class="ejercicio" id="ej1">
+                <h3>Ejercicio 1</h3>
+                <button type="button" class="boton" id="ej1-boton">Haz clic aquí</button>
+                <p id="ej1-mensaje">Todavía no has hecho clic.</p>
+            </div>
+
+            <div class="ejercicio" id="ej2">
+                <h3>Ejercicio 2</h3>
+                <div class="grupo-botones">
+                    <button type="button" class="boton" id="ej2-restar" aria-label="Restar uno">−</button>
+                    <output id="ej2-valor" class="valor-contador" aria-live="polite">0</output>
+                    <button type="button" class="boton" id="ej2-sumar" aria-label="Sumar uno">+</button>
+                    <button type="button" class="boton boton-secundario" id="ej2-reiniciar">Reiniciar</button>
+                </div>
+            </div>
+
+            <div class="ejercicio" id="ej3">
+                <h3>Ejercicio 3</h3>
+                <button type="button" class="boton" id="ej3-boton" aria-expanded="false" aria-controls="ej3-panel">Mostrar detalles</button>
+                <div id="ej3-panel" class="caja" hidden>
+                    Este panel estaba oculto con el atributo hidden.
+                </div>
+            </div>
+
+            <div class="ejercicio" id="ej4">
+                <h3>Ejercicio 4</h3>
+                <label class="etiqueta" for="ej4-nombre">Tu nombre</label>
+                <input class="campo" type="text" id="ej4-nombre" autocomplete="given-name">
+                <p id="ej4-saludo">Escribe tu nombre</p>
+            </div>
+
+            <div class="ejercicio" id="ej5">
+                <h3>Ejercicio 5</h3>
+                <label class="etiqueta" for="ej5-texto">Mensaje (máximo 100 caracteres)</label>
+                <textarea class="campo" id="ej5-texto" maxlength="100" rows="3"></textarea>
+                <p id="ej5-contador">0 / 100</p>
+            </div>
+
+            <div class="ejercicio" id="ej6">
+                <h3>Ejercicio 6</h3>
+                <label class="etiqueta" for="ej6-envio">Tipo de envío</label>
+                <select class="campo" id="ej6-envio">
+                    <option value="estandar">Estándar (3-5 días)</option>
+                    <option value="urgente">Urgente (24 horas)</option>
+                    <option value="recogida">Recogida en tienda</option>
+                </select>
+                <p id="ej6-precio">Coste del envío: —</p>
+            </div>
+
+            <div class="ejercicio" id="ej7">
+                <h3>Ejercicio 7</h3>
+                <ul id="ej7-lista" class="lista-acciones">
+                    <li><span>Comprar pan</span> <button type="button" class="boton boton-secundario">Eliminar</button></li>
+                    <li><span>Llamar al dentista</span> <button type="button" class="boton boton-secundario">Eliminar</button></li>
+                    <li><span>Estudiar eventos</span> <button type="button" class="boton boton-secundario">Eliminar</button></li>
+                    <li><span>Regar las plantas</span> <button type="button" class="boton boton-secundario">Eliminar</button></li>
+                </ul>
+                <p id="ej7-total">Quedan 4 tareas</p>
+            </div>
+
+            <div class="ejercicio" id="ej8">
+                <h3>Ejercicio 8</h3>
+                <p>Pulsa cualquier tecla (sin estar escribiendo en un campo).</p>
+                <p id="ej8-tecla" class="caja">Esperando una tecla...</p>
+            </div>
+
+            <div class="ejercicio" id="ej9">
+                <h3>Ejercicio 9</h3>
+                <form id="ej9-form" novalidate>
+                    <label class="etiqueta" for="ej9-nombre">Nombre</label>
+                    <input class="campo" type="text" id="ej9-nombre" name="nombre" autocomplete="name">
+                    <label class="etiqueta" for="ej9-email">Correo electrónico</label>
+                    <input class="campo" type="email" id="ej9-email" name="email" autocomplete="email">
+                    <button type="submit" class="boton">Enviar</button>
+                </form>
+                <p id="ej9-resultado" aria-live="polite"></p>
+            </div>
+
+            <div class="ejercicio" id="ej10">
+                <h3>Ejercicio 10</h3>
+                <div class="pestanas" id="ej10-pestanas" role="tablist" aria-label="Información del curso">
+                    <button type="button" class="pestana" role="tab" id="ej10-tab-temario" aria-selected="true" aria-controls="ej10-temario" data-panel="ej10-temario">Temario</button>
+                    <button type="button" class="pestana" role="tab" id="ej10-tab-horario" aria-selected="false" aria-controls="ej10-horario" data-panel="ej10-horario">Horario</button>
+                    <button type="button" class="pestana" role="tab" id="ej10-tab-precio" aria-selected="false" aria-controls="ej10-precio" data-panel="ej10-precio">Precio</button>
+                </div>
+                <div class="caja" role="tabpanel" id="ej10-temario" aria-labelledby="ej10-tab-temario">Variables, funciones, DOM, eventos y asincronía.</div>
+                <div class="caja" role="tabpanel" id="ej10-horario" aria-labelledby="ej10-tab-horario" hidden>De lunes a jueves, de 17:00 a 20:00.</div>
+                <div class="caja" role="tabpanel" id="ej10-precio" aria-labelledby="ej10-tab-precio" hidden>Gratuito para el alumnado del centro.</div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="js/ejercicios.js"></script>
+
+</body>
+</html>
