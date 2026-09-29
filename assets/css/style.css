@@ -472,6 +472,14 @@ ul li i {
     filter: brightness(1.1);
 }
 
+/* Botón desactivado mientras se espera (tema 14 · Asincronía). Las pautas WCAG no exigen
+   contraste mínimo a los controles desactivados, pero el cursor indica que no se puede pulsar */
+.boton:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    filter: none;
+}
+
 /* Botón secundario: solo borde, para acciones menos importantes */
 .boton-secundario {
     background-color: transparent;

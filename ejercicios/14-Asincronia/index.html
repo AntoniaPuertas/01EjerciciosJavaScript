@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asincronía</title>
+    <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="../../assets/js/tema.js"></script>
+</head>
+<body>
+
+    <div class="contenido">
+        <nav class="navegacion">
+            <a href="../../index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Índice</a>
+            <a href="../../soluciones/14-Asincronia/index.html"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Ver soluciones</a>
+        </nav>
+        <h1>Asincronía</h1>
+        <p>Hasta ahora, el código se ejecutaba línea a línea: cada instrucción esperaba a que terminara la anterior. Pero hay tareas que tardan: esperar unos segundos, pedir datos a un servidor, leer un archivo... Si JavaScript se quedara parado esperando, la página se congelaría.</p>
+        <p>El código <strong>asíncrono</strong> permite empezar una tarea lenta, seguir haciendo otras cosas y reaccionar cuando termine. Es la base de cualquier aplicación que carga datos de Internet.</p>
+
+        <h2>Síncrono y asíncrono</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>JavaScript hace una sola cosa a la vez</strong>: cuando encarga una tarea lenta al navegador (un temporizador, una petición...), no espera; sigue con el resto del código. Cuando la tarea termina, su función se pone en una cola y se ejecuta en cuanto JavaScript queda libre.
+                <div class="code-container"><pre><code>console.log('1. Empiezo');
+
+setTimeout(() => {
+    console.log('3. Pasado un momento');
+}, 0);
+
+console.log('2. Termino');
+
+// Resultado: 1. Empiezo → 2. Termino → 3. Pasado un momento
+// Aunque el tiempo es 0, la función espera a que acabe el código que se está ejecutando</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Temporizadores</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>setTimeout(función, milisegundos)</strong>: ejecuta la función una vez, pasado ese tiempo. Devuelve un identificador que sirve para cancelarlo con <code>clearTimeout()</code>.
+                <div class="code-container"><pre><code>const aviso = setTimeout(() => {
+    console.log('Han pasado 2 segundos');
+}, 2000);
+
+clearTimeout(aviso); // cancela el aviso si todavía no se ha ejecutado</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>setInterval(función, milisegundos)</strong>: ejecuta la función una y otra vez, cada cierto tiempo, hasta que se detiene con <code>clearInterval()</code>.
+                <div class="code-container"><pre><code>let segundos = 0;
+const reloj = setInterval(() => {
+    segundos++;
+    console.log(`${segundos} s`);
+    if (segundos === 5) {
+        clearInterval(reloj); // sin esto no pararía nunca
+    }
+}, 1000);</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Callbacks</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>La forma antigua</strong>: al principio, las tareas asíncronas recibían una función (callback) que se llamaba al terminar. Funciona, pero cuando una tarea depende de otra, los callbacks se anidan unos dentro de otros y el código se vuelve difícil de leer y de gestionar los errores. A esto se le llama <em>callback hell</em>.
+                <div class="code-container"><pre><code>cargarUsuario(id, (usuario) => {
+    cargarPedidos(usuario, (pedidos) => {
+        cargarFactura(pedidos[0], (factura) => {
+            console.log(factura);
+            // ...y cada paso necesitaría además su propio control de errores
+        });
+    });
+});</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Las promesas lo resuelven</strong>, y <code>async</code>/<code>await</code> lo hace todavía más legible.
+            </li>
+        </ul>
+
+        <h2>Promesas</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Qué es una promesa</strong>: un objeto que representa un resultado que llegará más adelante. Está en uno de estos estados: <strong>pendiente</strong> (todavía no ha terminado), <strong>cumplida</strong> (ha terminado bien y tiene un valor) o <strong>rechazada</strong> (ha fallado y tiene un error).
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Usar una promesa</strong>: <code>then()</code> recibe el valor si se cumple, <code>catch()</code> recibe el error si se rechaza y <code>finally()</code> se ejecuta en los dos casos.
+                <div class="code-container"><pre><code>fetch('datos.json')
+    .then(respuesta => respuesta.json())   // cada then devuelve otra promesa: se pueden encadenar
+    .then(datos => console.log(datos))
+    .catch(error => console.error('Algo ha fallado:', error))
+    .finally(() => console.log('Petición terminada'));</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Crear una promesa</strong>: con <code>new Promise()</code>. Recibe una función con dos parámetros: <code>resolve</code>, que se llama para cumplirla con un valor, y <code>reject</code>, que se llama para rechazarla con un error.
+                <div class="code-container"><pre><code>function esperar(ms) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
+}
+
+function comprobarEdad(edad) {
+    return new Promise((resolve, reject) => {
+        if (edad >= 18) {
+            resolve('Acceso permitido');
+        } else {
+            reject(new Error('Hay que ser mayor de edad'));
+        }
+    });
+}
+
+esperar(1000).then(() => console.log('Ha pasado 1 segundo'));</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>async y await</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Código asíncrono que se lee como normal</strong>: dentro de una función marcada con <code>async</code>, <code>await</code> pausa la función hasta que la promesa termina y devuelve su valor. Mientras tanto, la página sigue funcionando.
+                <div class="code-container"><pre><code>async function mostrarDatos() {
+    const respuesta = await fetch('datos.json');
+    const datos = await respuesta.json();
+    console.log(datos);
+}</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Errores con try...catch</strong>: si la promesa se rechaza, <code>await</code> lanza el error, que se captura con <code>try...catch</code>. El bloque <code>finally</code> se ejecuta siempre.
+                <div class="code-container"><pre><code>async function entrar(edad) {
+    try {
+        const mensaje = await comprobarEdad(edad);
+        console.log(mensaje);
+    } catch (error) {
+        console.log(error.message); // 'Hay que ser mayor de edad'
+    } finally {
+        console.log('Comprobación terminada');
+    }
+}</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Una función async siempre devuelve una promesa</strong>: lo que pongas en su <code>return</code> será el valor con el que se cumpla. Por eso, quien la llame tendrá que usar <code>await</code> o <code>then()</code>.
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>await solo dentro de async</strong>: fuera de una función <code>async</code> da error, salvo en los scripts de tipo módulo (<code>&lt;script type="module"&gt;</code>), que permiten usar <code>await</code> directamente.
+            </li>
+        </ul>
+
+        <h2>Pedir datos con fetch</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>fetch(url)</strong>: hace una petición y devuelve una promesa con la respuesta. Con <code>response.json()</code> (que también es asíncrono) se convierte el contenido JSON en objetos y arrays.
+                <div class="code-container"><pre><code>async function cargarProductos() {
+    const respuesta = await fetch('../../assets/datos/productos.json');
+    const productos = await respuesta.json();
+    console.log(productos);
+}</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Comprueba response.ok</strong>: <code>fetch</code> solo se rechaza si no hay conexión. Si el servidor responde con un error, como 404 (no encontrado) o 500 (error del servidor), la promesa se cumple igualmente. Hay que mirar <code>response.ok</code> (o <code>response.status</code>) y lanzar el error a mano.
+                <div class="code-container"><pre><code>async function cargarJSON(url) {
+    const respuesta = await fetch(url);
+    if (!respuesta.ok) {
+        throw new Error(`Error ${respuesta.status} al cargar ${url}`);
+    }
+    return respuesta.json();
+}</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Enviar datos</strong>: para enviar información a un servidor se indica el método, las cabeceras y el cuerpo convertido a JSON.
+                <div class="code-container"><pre><code>const respuesta = await fetch('https://api.ejemplo.com/usuarios', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ nombre: 'Ana', email: 'ana@ejemplo.com' }),
+});</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Rutas relativas a la página</strong>: la ruta de <code>fetch</code> se calcula desde la página HTML que está abierta, no desde el archivo <code>.js</code> donde está escrito.
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Necesita un servidor</strong>: si abres la página con doble clic (la dirección empieza por <code>file://</code>), el navegador bloquea las peticiones por seguridad. Ábrela con WAMP, XAMPP o la extensión Live Server de VS Code. Por el mismo motivo de seguridad, un servidor solo acepta peticiones de otras webs si lo permite expresamente (lo que se conoce como <strong>CORS</strong>).
+            </li>
+        </ul>
+
+        <h2>Varias promesas a la vez</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>En secuencia o en paralelo</strong>: dos <code>await</code> seguidos esperan uno detrás de otro. Si las tareas no dependen entre sí, es más rápido lanzarlas a la vez con <code>Promise.all()</code>.
+                <div class="code-container"><pre><code>// En secuencia: tarda lo que tarden las dos juntas
+const productos = await cargarJSON('productos.json');
+const categorias = await cargarJSON('categorias.json');
+
+// En paralelo: tarda lo que tarde la más lenta
+const [productos2, categorias2] = await Promise.all([
+    cargarJSON('productos.json'),
+    cargarJSON('categorias.json'),
+]);</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Promise.all()</strong>: se cumple cuando se cumplen todas, con sus resultados en el mismo orden. Si una falla, falla todo.
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Promise.allSettled()</strong>: espera a que terminen todas, fallen o no, y devuelve el estado de cada una. Útil cuando quieres mostrar lo que sí se ha podido cargar.
+                <div class="code-container"><pre><code>const resultados = await Promise.allSettled([cargarJSON('a.json'), cargarJSON('b.json')]);
+// [{ status: 'fulfilled', value: ... }, { status: 'rejected', reason: Error }]</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Promise.race()</strong>: termina con la primera que termine, se cumpla o se rechace. Se usa, por ejemplo, para poner un tiempo máximo.
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Promise.any()</strong>: se cumple con la primera que se cumpla y solo falla si fallan todas. Útil para pedir lo mismo a varios servidores y quedarse con el más rápido.
+            </li>
+        </ul>
+
+        <h2>Novedades recientes</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>AbortSignal.timeout()</strong>: cancela una petición si tarda demasiado, sin tener que programarlo a mano.
+                <div class="code-container"><pre><code>try {
+    const respuesta = await fetch(url, { signal: AbortSignal.timeout(5000) });
+} catch (error) {
+    if (error.name === 'TimeoutError') {
+        console.log('El servidor ha tardado más de 5 segundos');
+    }
+}</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Promise.withResolvers()</strong> (ES2024): crea una promesa y devuelve también sus funciones <code>resolve</code> y <code>reject</code>, para poder cumplirla o rechazarla desde fuera. Está disponible en todos los navegadores actuales.
+                <div class="code-container"><pre><code>const { promise, resolve } = Promise.withResolvers();
+boton.addEventListener('click', () => resolve('¡Pulsado!'), { once: true });
+console.log(await promise); // espera hasta que se pulse el botón</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Promise.try()</strong> (ES2025): ejecuta una función y devuelve siempre una promesa, tanto si la función es síncrona como asíncrona, y convierte en rechazo cualquier error que lance. Todos los navegadores principales la incluyen desde enero de 2025.
+                <div class="code-container"><pre><code>Promise.try(() => JSON.parse(texto))   // si el texto no es JSON válido...
+    .then(datos => console.log(datos))
+    .catch(error => console.log('JSON incorrecto')); // ...el error llega aquí</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Buenas prácticas</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Controla siempre los errores</strong> con <code>catch()</code> o <code>try...catch</code>. Muestra al usuario un mensaje claro y deja los detalles técnicos en la consola.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Informa de lo que está pasando</strong>: muestra un mensaje de "Cargando..." y desactiva los botones mientras se espera, para que el usuario no los pulse varias veces.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Lanza en paralelo</strong> las tareas que no dependen entre sí.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Detén los intervalos</strong> que ya no necesites con <code>clearInterval()</code>.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>No olvides el await</strong>: sin él, obtienes la promesa en lugar de su valor. Si ves <code>Promise {&lt;pending&gt;}</code> en la consola, probablemente falta un <code>await</code>.
+            </li>
+        </ul>
+
+        <h2>Practica</h2>
+        <p>En <code>js/ejercicios.js</code> tienes 10 ejercicios que dan vida a la zona de prácticas de aquí abajo. Recuerda que los ejercicios con <code>fetch</code> necesitan que abras la página desde un servidor. Cuando termines, compáralos con las <a href="../../soluciones/14-Asincronia/index.html">soluciones</a>.</p>
+
+        <section class="zona-practica" aria-labelledby="titulo-zona-practica">
+            <h2 id="titulo-zona-practica">Zona de prácticas</h2>
+            <p>Los ejercicios hacen que estos elementos esperen, se repitan o carguen datos. Mientras no los resuelvas, no harán nada.</p>
+
+            <div class="ejercicio" id="ej1">
+                <h3>Ejercicio 1</h3>
+                <button type="button" class="boton" id="ej1-boton">Avisar en 3 segundos</button>
+                <p id="ej1-mensaje" aria-live="polite"></p>
+            </div>
+
+            <div class="ejercicio" id="ej2">
+                <h3>Ejercicio 2</h3>
+                <div class="grupo-botones">
+                    <output id="ej2-tiempo" class="valor-contador" aria-live="polite">10</output>
+                    <button type="button" class="boton" id="ej2-iniciar">Iniciar</button>
+                    <button type="button" class="boton boton-secundario" id="ej2-detener">Detener</button>
+                </div>
+            </div>
+
+            <div class="ejercicio" id="ej3">
+                <h3>Ejercicio 3</h3>
+                <button type="button" class="boton" id="ej3-boton">Esperar 1,5 segundos</button>
+                <p id="ej3-mensaje" aria-live="polite"></p>
+            </div>
+
+            <div class="ejercicio" id="ej4">
+                <h3>Ejercicio 4</h3>
+                <button type="button" class="boton" id="ej4-boton">Tirar el dado</button>
+                <p id="ej4-resultado" aria-live="polite"></p>
+            </div>
+
+            <div class="ejercicio" id="ej5">
+                <h3>Ejercicio 5</h3>
+                <button type="button" class="boton" id="ej5-boton">Iniciar secuencia</button>
+                <p id="ej5-luz" class="caja" aria-live="polite">Semáforo apagado</p>
+            </div>
+
+            <div class="ejercicio" id="ej6">
+                <h3>Ejercicio 6</h3>
+                <button type="button" class="boton" id="ej6-boton">Cargar productos</button>
+                <p id="ej6-estado" aria-live="polite"></p>
+                <ul id="ej6-lista"></ul>
+            </div>
+
+            <div class="ejercicio" id="ej7">
+                <h3>Ejercicio 7</h3>
+                <button type="button" class="boton" id="ej7-boton">Cargar un archivo que no existe</button>
+                <p id="ej7-resultado" aria-live="polite"></p>
+            </div>
+
+            <div class="ejercicio" id="ej8">
+                <h3>Ejercicio 8</h3>
+                <button type="button" class="boton" id="ej8-boton">Cargar productos y categorías</button>
+                <p id="ej8-estado" aria-live="polite"></p>
+                <ul id="ej8-lista"></ul>
+            </div>
+
+            <div class="ejercicio" id="ej9">
+                <h3>Ejercicio 9</h3>
+                <label class="etiqueta" for="ej9-buscar">Buscar producto</label>
+                <input class="campo" type="search" id="ej9-buscar" autocomplete="off">
+                <p id="ej9-estado" aria-live="polite"></p>
+                <ul id="ej9-resultados"></ul>
+            </div>
+
+            <div class="ejercicio" id="ej10">
+                <h3>Ejercicio 10</h3>
+                <div class="grupo-botones">
+                    <button type="button" class="boton" id="ej10-rapida">Petición rápida (1 s)</button>
+                    <button type="button" class="boton" id="ej10-lenta">Petición lenta (3 s)</button>
+                </div>
+                <p id="ej10-resultado" aria-live="polite"></p>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="js/ejercicios.js"></script>
+
+</body>
+</html>

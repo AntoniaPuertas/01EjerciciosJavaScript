@@ -19,10 +19,13 @@ El proyecto no usa números de versión: cada bloque de cambios se identifica po
 - **Estilos de la zona de prácticas** en `style.css` y dos variables de color nuevas para ambos temas (`--color-error` y `--color-texto-sobre-acento`), con contrastes comprobados. Las tarjetas agotadas no usan el texto atenuado, que en el tema oscuro solo alcanzaba 3,1:1 sobre el fondo.
 - **Tema 13 · Eventos**: tema nuevo con teoría (`addEventListener`, eventos de ratón, puntero, teclado, formulario y página, el objeto evento, `preventDefault()`, formularios con `FormData` y validación HTML, propagación y delegación, `removeEventListener`, `once`, `AbortController` y accesibilidad) y 10 ejercicios interactivos con su propia zona de prácticas: contador, panel desplegable, campos en directo, formulario validado, lista con delegación y pestañas accesibles. Las soluciones se han comprobado en jsdom simulando clics, escritura, teclas y envíos de formulario.
 - **Estilos de controles** (botones, campos, mensajes y pestañas) en `style.css` para ambos temas, con contorno visible al navegar con el teclado. Los bordes de los campos usan el color atenuado para cumplir el contraste mínimo de 3:1 que piden las pautas WCAG para los controles.
-- **Índice general**: el tema 14 aparece como "Próximamente", igual que en el README.
+- **Tema 14 · Asincronía**: tema nuevo con teoría (síncrono frente a asíncrono, `setTimeout` y `setInterval`, callbacks, promesas, `async`/`await` con `try...catch`, `fetch` con `response.ok` y envío de datos, rutas relativas a la página, necesidad de un servidor y CORS, `Promise.all`/`allSettled`/`race`/`any`, y como novedades `AbortSignal.timeout()`, `Promise.withResolvers()` y `Promise.try()`) y 10 ejercicios con zona de prácticas: temporizadores, cuenta atrás, promesas propias, semáforo con `await`, carga de JSON, error 404, carga en paralelo, buscador con *debounce* y límite de tiempo con `Promise.race`. Las soluciones se han comprobado en jsdom con un servidor HTTP local y tiempos reales.
+- **Datos de ejemplo** en `assets/datos/` (`productos.json` y `categorias.json`), compartidos por la página de ejercicios y la de soluciones del tema 14.
+- **Estilo para botones desactivados** mientras se espera una tarea asíncrona.
+- **Índice general y README**: los 14 primeros temas están disponibles, y los temas 15 · Módulos, 16 · Clases y POO, 17 · Almacenamiento en el navegador y 18 · APIs aparecen como "Próximamente".
 - **Soluciones** de los ejercicios de los temas 06 · Booleanos (10) y 07 · Objetos (9).
-- **Archivos de enunciados** (`ejercicios/NN-Tema/js/ejercicios.js`) para los temas 03 a 13. Cada ejercicio tiene su enunciado, un encabezado en consola y un hueco para la solución, y los datos de partida ya están declarados.
-- **Páginas de soluciones** (`soluciones/NN-Tema/index.html`) para los temas 03 a 13.
+- **Archivos de enunciados** (`ejercicios/NN-Tema/js/ejercicios.js`) para los temas 03 a 14. Cada ejercicio tiene su enunciado, un encabezado en consola y un hueco para la solución, y los datos de partida ya están declarados.
+- **Páginas de soluciones** (`soluciones/NN-Tema/index.html`) para los temas 03 a 14.
 - **Barra de navegación** en todas las páginas, con enlaces al índice y entre la teoría y la solución de cada tema.
 - **Tema claro y oscuro**:
   - Hay un botón en la esquina superior derecha de todas las páginas.
@@ -64,9 +67,12 @@ El proyecto no usa números de versión: cada bloque de cambios se identifica po
 
 ## Notas para el profesorado
 
-- **Comprobación:** las soluciones de los temas 03 a 11 se han ejecutado en Node.js en modo estricto, simulando `prompt()`, y las de los temas 12 y 13 en jsdom (un navegador simulado) con su zona de prácticas, simulando en el 13 las interacciones del usuario. Los resultados coinciden con los comentarios del código. El aspecto visual de las páginas debe revisarse en el navegador.
-- **Zonas de prácticas de los temas 12 y 13:** su HTML está repetido en la página de teoría y en la de soluciones de cada tema. Si se cambia un ejercicio, hay que actualizar las dos copias.
+- **Comprobación:** las soluciones de los temas 03 a 11 se han ejecutado en Node.js en modo estricto, simulando `prompt()`, y las de los temas 12, 13 y 14 en jsdom (un navegador simulado) con su zona de prácticas, simulando las interacciones del usuario y, en el 14, sirviendo los datos con un servidor HTTP local. `Promise.try()` no se ha podido ejecutar porque la versión de Node.js usada (22) no la incluye; su disponibilidad en navegadores se basa en el anuncio de web.dev de enero de 2025. Los resultados coinciden con los comentarios del código. El aspecto visual de las páginas debe revisarse en el navegador.
+- **Zonas de prácticas de los temas 12, 13 y 14:** su HTML está repetido en la página de teoría y en la de soluciones de cada tema. Si se cambia un ejercicio, hay que actualizar las dos copias.
+- **Tema 14 y `file://`:** los ejercicios 6 a 9 usan `fetch` y no funcionan abriendo la página con doble clic. La solución muestra un aviso específico en ese caso, y el README, la teoría y los enunciados lo explican.
 - **Carpetas antiguas:** tras la reorganización, en la raíz pueden quedar las carpetas `01-Introduccion` … `09-Condicionales` vacías; se pueden borrar.
 - **Licencia:** el proyecto no incluye archivo de licencia. Si se quiere permitir su reutilización, se puede añadir una (por ejemplo, MIT o, para material docente, Creative Commons BY-SA).
-- **Temas pendientes:** 14 · Asincronía (anunciados en el README y en el índice como "Próximamente").
+- **Temas pendientes:** 15 · Módulos, 16 · Clases y POO, 17 · Almacenamiento en el navegador y 18 · APIs, anunciados en el README y en el índice como "Próximamente". El orden sigue sus dependencias: las clases se organizan en módulos, el almacenamiento usa objetos y JSON, y el tema de APIs combina todo lo anterior con `fetch`.
+- **Tema 15 y `file://`:** igual que `fetch`, los módulos (`<script type="module">`) no funcionan abriendo la página con doble clic. Habrá que avisarlo como en el tema 14.
+- **Tema 18:** conviene elegir una API pública gratuita, sin clave y que permita peticiones desde el navegador (CORS). Antes de crearlo hay que comprobar que sigue disponible, porque las APIs públicas cambian o desaparecen con el tiempo.
 - **Al publicar estos cambios:** sustituye `## [Sin publicar]` por la fecha de publicación, por ejemplo `## 2026-09-28`, y abre una nueva sección `## [Sin publicar]` encima para los cambios siguientes.

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soluciones · Asincronía</title>
+    <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="../../assets/js/tema.js"></script>
+</head>
+<body>
+
+    <div class="contenido">
+        <nav class="navegacion">
+            <a href="../../index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Índice</a>
+            <a href="../../ejercicios/14-Asincronia/index.html"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Volver a la teoría</a>
+        </nav>
+        <h1>Soluciones: Asincronía</h1>
+        <p>Esta página ejecuta las soluciones de los 10 ejercicios de Asincronía.</p>
+        <ul>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                Prueba los botones de la zona de prácticas de aquí abajo y observa cómo cambian los mensajes con el tiempo.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                Los ejercicios 6 a 9 cargan datos con <code>fetch</code>: abre esta página desde un servidor (WAMP, XAMPP, Live Server...), no con doble clic.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                Abre la pestaña <strong>Red</strong> (<em>Network</em>) de las herramientas de desarrollador (<code>F12</code>) para ver las peticiones: en el ejercicio 8, las dos salen a la vez, y en el 7 aparece el error 404.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                El código está en <code>soluciones/14-Asincronia/js/soluciones.js</code> y los datos en <code>assets/datos/</code>.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                Intenta resolver primero los ejercicios por tu cuenta: hay muchas soluciones correctas y la tuya no tiene por qué coincidir con esta.
+            </li>
+        </ul>
+
+        <section class="zona-practica" aria-labelledby="titulo-zona-practica">
+            <h2 id="titulo-zona-practica">Zona de prácticas</h2>
+            <p>Los ejercicios hacen que estos elementos esperen, se repitan o carguen datos. Mientras no los resuelvas, no harán nada.</p>
+
+            <div class="ejercicio" id="ej1">
+                <h3>Ejercicio 1</h3>
+                <button type="button" class="boton" id="ej1-boton">Avisar en 3 segundos</button>
+                <p id="ej1-mensaje" aria-live="polite"></p>
+            </div>
+
+            <div class="ejercicio" id="ej2">
+                <h3>Ejercicio 2</h3>
+                <div class="grupo-botones">
+                    <output id="ej2-tiempo" class="valor-contador" aria-live="polite">10</output>
+                    <button type="button" class="boton" id="ej2-iniciar">Iniciar</button>
+                    <button type="button" class="boton boton-secundario" id="ej2-detener">Detener</button>
+                </div>
+            </div>
+
+            <div class="ejercicio" id="ej3">
+                <h3>Ejercicio 3</h3>
+                <button type="button" class="boton" id="ej3-boton">Esperar 1,5 segundos</button>
+                <p id="ej3-mensaje" aria-live="polite"></p>
+            </div>
+
+            <div class="ejercicio" id="ej4">
+                <h3>Ejercicio 4</h3>
+                <button type="button" class="boton" id="ej4-boton">Tirar el dado</button>
+                <p id="ej4-resultado" aria-live="polite"></p>
+            </div>
+
+            <div class="ejercicio" id="ej5">
+                <h3>Ejercicio 5</h3>
+                <button type="button" class="boton" id="ej5-boton">Iniciar secuencia</button>
+                <p id="ej5-luz" class="caja" aria-live="polite">Semáforo apagado</p>
+            </div>
+
+            <div class="ejercicio" id="ej6">
+                <h3>Ejercicio 6</h3>
+                <button type="button" class="boton" id="ej6-boton">Cargar productos</button>
+                <p id="ej6-estado" aria-live="polite"></p>
+                <ul id="ej6-lista"></ul>
+            </div>
+
+            <div class="ejercicio" id="ej7">
+                <h3>Ejercicio 7</h3>
+                <button type="button" class="boton" id="ej7-boton">Cargar un archivo que no existe</button>
+                <p id="ej7-resultado" aria-live="polite"></p>
+            </div>
+
+            <div class="ejercicio" id="ej8">
+                <h3>Ejercicio 8</h3>
+                <button type="button" class="boton" id="ej8-boton">Cargar productos y categorías</button>
+                <p id="ej8-estado" aria-live="polite"></p>
+                <ul id="ej8-lista"></ul>
+            </div>
+
+            <div class="ejercicio" id="ej9">
+                <h3>Ejercicio 9</h3>
+                <label class="etiqueta" for="ej9-buscar">Buscar producto</label>
+                <input class="campo" type="search" id="ej9-buscar" autocomplete="off">
+                <p id="ej9-estado" aria-live="polite"></p>
+                <ul id="ej9-resultados"></ul>
+            </div>
+
+            <div class="ejercicio" id="ej10">
+                <h3>Ejercicio 10</h3>
+                <div class="grupo-botones">
+                    <button type="button" class="boton" id="ej10-rapida">Petición rápida (1 s)</button>
+                    <button type="button" class="boton" id="ej10-lenta">Petición lenta (3 s)</button>
+                </div>
+                <p id="ej10-resultado" aria-live="polite"></p>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/soluciones.js"></script>
+</body>
+</html>
