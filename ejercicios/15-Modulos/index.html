@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="../../assets/js/tema.js"></script>
+</head>
+<body>
+
+    <div class="contenido">
+        <nav class="navegacion">
+            <a href="../../index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Índice</a>
+            <a href="../../soluciones/15-Modulos/index.html"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Ver soluciones</a>
+        </nav>
+        <h1>Módulos</h1>
+        <p>A medida que un programa crece, tenerlo todo en un solo archivo se vuelve inmanejable. Los <strong>módulos</strong> permiten dividir el código en varios archivos, cada uno con una responsabilidad, y decidir qué comparte cada archivo con los demás.</p>
+        <p>Cada módulo tiene su propio ámbito: sus variables no son globales, así que no chocan con las de otros archivos. Es justo el problema que tuvimos en el tema de Arrays, donde los ejercicios tenían que ir dentro de funciones para no chocar con las variables de <code>app.js</code>.</p>
+
+        <h2>Cargar un módulo</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>type="module"</strong>: para que un archivo funcione como módulo, se carga con este atributo. Solo hace falta enlazar el archivo principal; los demás se cargan solos a través de sus <code>import</code>.
+                <div class="code-container"><pre><code>&lt;script type="module" src="js/app.js"&gt;&lt;/script&gt;</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Qué cambia en un módulo</strong>:
+                <div class="code-container"><pre><code>// 1. Su propio ámbito: esta variable no es global
+const mensaje = 'Solo existe en este archivo';
+
+// 2. Modo estricto automático: sin 'use strict', esto ya es un error
+// total = 5; // ReferenceError: total is not defined
+
+// 3. Se ejecuta cuando el HTML está listo, como un script con defer
+
+// 4. Se ejecuta una sola vez, aunque lo importen muchos archivos</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Necesita un servidor</strong>: igual que <code>fetch</code>, los módulos no se cargan si abres la página con doble clic (<code>file://</code>). Usa WAMP, XAMPP o Live Server.
+            </li>
+        </ul>
+
+        <h2>Exportar</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Exportaciones con nombre</strong>: se pone <code>export</code> delante de lo que se quiere compartir. Lo que no se exporta es <strong>privado</strong> del módulo.
+                <div class="code-container"><pre><code>// matematicas.js
+export const PI = 3.14159;
+
+export function areaCirculo(radio) {
+    return redondear(PI * radio ** 2);
+}
+
+// Privada: no se puede usar desde otros archivos
+function redondear(numero) {
+    return Math.round(numero * 100) / 100;
+}</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Exportar al final</strong>: también se puede escribir una lista al final del archivo, y dar otro nombre con <code>as</code>.
+                <div class="code-container"><pre><code>function sumar(a, b) { return a + b; }
+function multiplicar(a, b) { return a * b; }
+
+export { sumar, multiplicar as producto };</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Exportación por defecto</strong>: cada módulo puede tener una sola, pensada para lo principal del archivo.
+                <div class="code-container"><pre><code>// saludo.js
+export default function saludar(nombre) {
+    return `Hola, ${nombre}`;
+}</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Importar</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Importaciones con nombre</strong>: entre llaves, con el mismo nombre con el que se exportaron. Con <code>as</code> se les da otro nombre, por ejemplo si ya existe una variable con ese nombre.
+                <div class="code-container"><pre><code>import { PI, areaCirculo } from './matematicas.js';
+import { producto as multiplicar } from './matematicas.js';</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Importación por defecto</strong>: sin llaves, y con el nombre que tú elijas.
+                <div class="code-container"><pre><code>import saludar from './saludo.js';
+import darBienvenida from './saludo.js'; // la misma función con otro nombre</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Importar todo</strong>: con <code>* as</code> se reúnen todas las exportaciones en un objeto.
+                <div class="code-container"><pre><code>import * as mates from './matematicas.js';
+console.log(mates.PI);
+console.log(mates.areaCirculo(2));</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Rutas</strong>: son relativas al <strong>archivo .js que importa</strong> (al contrario que en <code>fetch</code>, que son relativas a la página), empiezan por <code>./</code> o <code>../</code> y llevan la extensión <code>.js</code>.
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Los import van primero</strong>: se ejecutan antes que el resto del código, estén donde estén escritos. Por convención se escriben al principio del archivo.
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Son de solo lectura</strong>: no se puede asignar un valor nuevo a algo importado. Además, están "vivos": si el módulo cambia el valor de una variable exportada, quien la importa ve el valor nuevo.
+                <div class="code-container"><pre><code>import { PI } from './matematicas.js';
+PI = 3; // TypeError: no se puede asignar a una importación</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Si falla una importación, falla todo</strong>: si importas algo que el módulo no exporta, o un archivo que no existe, no se ejecuta nada del archivo. La consola indica qué falta.
+            </li>
+        </ul>
+
+        <h2>Reexportar: módulos "barril"</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Un punto de entrada único</strong>: un módulo puede reexportar lo de otros. Así, quien lo use importa todo desde un solo archivo, normalmente llamado <code>index.js</code>, sin saber en cuál está cada cosa.
+                <div class="code-container"><pre><code>// utilidades/index.js
+export * from './matematicas.js';
+export * from './formato.js';
+export { default as saludar } from './saludo.js'; // export * no incluye la exportación por defecto
+
+// app.js
+import { areaCirculo, formatearPrecio, saludar } from './utilidades/index.js';</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Importación dinámica</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>import()</strong>: carga un módulo en el momento en que hace falta, no al abrir la página. Devuelve una promesa con el módulo, así que se usa con <code>await</code>. Sirve para que la página cargue más rápido, dejando para después el código que quizá no se use.
+                <div class="code-container"><pre><code>boton.addEventListener('click', async () => {
+    const { generarGrafico } = await import('./grafico.js');
+    generarGrafico(datos);
+});</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>await en el nivel superior</strong>: en un módulo, <code>await</code> se puede usar fuera de una función <code>async</code>.
+                <div class="code-container"><pre><code>// Solo en módulos
+const respuesta = await fetch('datos.json');
+const datos = await respuesta.json();</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Novedades</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Importar JSON</strong> (ES2025): con los <em>atributos de importación</em> se puede importar un archivo JSON como un módulo. Funciona en todos los navegadores principales desde 2025. El JSON solo tiene exportación por defecto.
+                <div class="code-container"><pre><code>import productos from './productos.json' with { type: 'json' };
+console.log(productos.length);</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Importar JSON frente a fetch</strong>: si una importación estática de JSON falla, cae todo el módulo con ella. Para datos que pueden fallar o cambiar (por ejemplo, los de un servidor), <code>fetch</code> sigue siendo mejor opción, porque permite controlar el error con <code>try...catch</code>.
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>Import maps</strong>: permiten dar un nombre corto a una ruta o a una dirección, para escribir <code>import</code> más cómodos. Se definen en el HTML, antes del primer módulo.
+                <div class="code-container"><pre><code>&lt;script type="importmap"&gt;
+{ "imports": { "utilidades": "./js/utilidades/index.js" } }
+&lt;/script&gt;
+
+// En cualquier módulo:
+import { saludar } from 'utilidades';</code></pre></div>
+            </li>
+            <li>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                <strong>import.meta.url</strong>: la dirección completa del módulo actual. Sirve para construir rutas relativas al propio módulo, por ejemplo para usarlas con <code>fetch</code>.
+                <div class="code-container"><pre><code>const ruta = new URL('./datos.json', import.meta.url);
+const respuesta = await fetch(ruta); // relativa al módulo, no a la página</code></pre></div>
+            </li>
+        </ul>
+
+        <h2>Buenas prácticas</h2>
+        <ul>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Un módulo, una responsabilidad</strong>: datos, formato, interfaz, cálculos... Si un archivo hace de todo, divídelo.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Exporta solo lo necesario</strong>: lo privado se puede cambiar sin miedo a romper otros archivos.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Prefiere las exportaciones con nombre</strong>: obligan a usar el mismo nombre en todo el proyecto, lo que facilita buscar dónde se usa cada cosa. Con la exportación por defecto, cada archivo puede llamarla de una forma.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                <strong>Evita las dependencias circulares</strong>: si <code>a.js</code> importa <code>b.js</code> y <code>b.js</code> importa <code>a.js</code>, es fácil que algo no esté listo cuando se usa. Suele indicar que hay código que debería estar en un tercer módulo.
+            </li>
+        </ul>
+
+        <h2>Practica</h2>
+        <p>En este tema escribes código en dos sitios: los módulos de la carpeta <code>js/modulos/</code> y el archivo <code>js/ejercicios.js</code>, que los importa. Recuerda descomentar cada <code>import</code> solo cuando el módulo ya exporte lo que importa. Cuando termines, compáralos con las <a href="../../soluciones/15-Modulos/index.html">soluciones</a>.</p>
+
+        <section class="zona-practica" aria-labelledby="titulo-zona-practica">
+            <h2 id="titulo-zona-practica">Zona de prácticas</h2>
+            <p>La mayoría de los ejercicios muestran sus resultados en la consola (<code>F12</code>). Los ejercicios 9 y 10 usan estos elementos.</p>
+
+            <div class="ejercicio" id="ej9">
+                <h3>Ejercicio 9</h3>
+                <button type="button" class="boton" id="ej9-boton">Calcular estadísticas</button>
+                <p id="ej9-resultado" aria-live="polite"></p>
+            </div>
+
+            <div class="ejercicio" id="ej10">
+                <h3>Ejercicio 10</h3>
+                <div id="ej10-productos" class="tarjetas"></div>
+            </div>
+        </section>
+
+    </div>
+
+    <script type="module" src="js/ejercicios.js"></script>
+
+</body>
+</html>

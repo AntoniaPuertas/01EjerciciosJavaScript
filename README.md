@@ -26,7 +26,7 @@ Cada tema tiene una página de **teoría** con ejemplos y una serie de **ejercic
 | 12 | DOM | Seleccionar elementos de la página, cambiar su contenido, sus atributos y sus estilos, crear y eliminar elementos | 10 |
 | 13 | Eventos | Responder a clics, teclas y formularios con `addEventListener`, validar formularios y delegación de eventos | 10 |
 | 14 | Asincronía | Temporizadores, promesas, `async` / `await`, pedir datos con `fetch` y controlar los errores | 10 |
-| 15 | Módulos | Dividir el código en varios archivos con `import` y `export`, y cargarlos con `<script type="module">` | 🚧 Próximamente |
+| 15 | Módulos | Dividir el código en varios archivos con `import` y `export`, cargarlos con `<script type="module">` e importarlos solo cuando hacen falta | 10 |
 | 16 | Clases y POO | Crear objetos con `class`, constructor, métodos, propiedades privadas, *getters* y *setters*, y herencia con `extends` | 🚧 Próximamente |
 | 17 | Almacenamiento en el navegador | Guardar datos que no se pierden al recargar la página con `localStorage` y `sessionStorage`, usando JSON | 🚧 Próximamente |
 | 18 | APIs | Consumir una API pública real: leer su documentación, hacer peticiones, parámetros de búsqueda y mostrar los resultados | 🚧 Próximamente |
@@ -83,6 +83,7 @@ Cada tema tiene una página de **teoría** con ejemplos y una serie de **ejercic
 - **En el tema de Arrays** cada ejercicio va dentro de una función. Escribe tu código dentro de ella: así tus variables no chocan con las de los ejemplos de ese tema.
 - **En los temas del DOM y de Eventos** los ejercicios cambian la propia página: los resultados se ven en la **Zona de prácticas** que hay al final de la teoría. En Eventos, además, tienes que interactuar con ella (hacer clic, escribir, pulsar teclas) para comprobar que tu código funciona.
 - **En el tema de Asincronía**, los ejercicios que cargan datos con `fetch` solo funcionan si abres la página desde un servidor (WAMP, XAMPP o Live Server). Con doble clic, el navegador bloquea las peticiones.
+- **En el tema de Módulos** escribes en varios archivos: los módulos de la carpeta `js/modulos/` y `ejercicios.js`, que los importa. Descomenta cada `import` solo cuando el módulo ya exporte lo que importa: si falta algo, no se ejecuta ningún ejercicio. También necesita un servidor.
 - **¿Prefieres otros colores?** El botón de la esquina superior derecha cambia entre tema claro y oscuro, y la página recuerda tu elección.
 
 ---

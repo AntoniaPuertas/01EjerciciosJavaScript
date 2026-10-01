@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soluciones · Módulos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="../../assets/js/tema.js"></script>
+</head>
+<body>
+
+    <div class="contenido">
+        <nav class="navegacion">
+            <a href="../../index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> Índice</a>
+            <a href="../../ejercicios/15-Modulos/index.html"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Volver a la teoría</a>
+        </nav>
+        <h1>Soluciones: Módulos</h1>
+        <p>Esta página ejecuta las soluciones de los 10 ejercicios de Módulos.</p>
+        <ul>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                Abre la consola (<code>F12</code>) para ver los resultados de los ejercicios 1 a 8.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                Abre la página desde un servidor (WAMP, XAMPP, Live Server...): con doble clic, los módulos no se cargan.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                Abre la pestaña <strong>Red</strong> (<em>Network</em>) de las herramientas de desarrollador antes de pulsar el botón del ejercicio 9: verás que <code>estadisticas.js</code> solo se descarga al pulsarlo.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                El código está en <code>soluciones/15-Modulos/js/</code>: el archivo principal es <code>soluciones.js</code> y los módulos están en la carpeta <code>modulos/</code>.
+            </li>
+            <li>
+                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                Intenta resolver primero los ejercicios por tu cuenta: hay muchas soluciones correctas y la tuya no tiene por qué coincidir con esta.
+            </li>
+        </ul>
+
+        <section class="zona-practica" aria-labelledby="titulo-zona-practica">
+            <h2 id="titulo-zona-practica">Zona de prácticas</h2>
+            <p>La mayoría de los ejercicios muestran sus resultados en la consola (<code>F12</code>). Los ejercicios 9 y 10 usan estos elementos.</p>
+
+            <div class="ejercicio" id="ej9">
+                <h3>Ejercicio 9</h3>
+                <button type="button" class="boton" id="ej9-boton">Calcular estadísticas</button>
+                <p id="ej9-resultado" aria-live="polite"></p>
+            </div>
+
+            <div class="ejercicio" id="ej10">
+                <h3>Ejercicio 10</h3>
+                <div id="ej10-productos" class="tarjetas"></div>
+            </div>
+        </section>
+    </div>
+
+    <script type="module" src="js/soluciones.js"></script>
+</body>
+</html>
